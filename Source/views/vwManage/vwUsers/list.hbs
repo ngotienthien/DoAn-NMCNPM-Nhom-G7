@@ -1,0 +1,101 @@
+{{#section 'js'}}
+<script>
+    function delete_function(id) {
+      var choice = confirm('Are you sure you delete user : ' + id);
+         if (choice) {
+             document.getElementById('myform'+id.toString()).submit();
+          }
+    }
+    function register_premium(id){
+      var choice = confirm('Are you sure up to premium for user : ' + id);
+         if (choice) {
+             document.getElementById('form'+id.toString()).submit();
+          }
+    }
+</script>
+{{/section}}
+
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/users/list">User</a></li>
+      <li class="breadcrumb-item active">List</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+          <h2>Users <b>List </b></h2>
+        </div>
+         {{#if success}}
+            <div class="alert alert-success" role="alert">
+              {{success}}
+            </div>
+          {{/if}}
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Date Of Birth</th>
+                <th>Nick Name</th>
+                <th>Type Of User </th>
+                <th>Premium</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>#</th>
+                <th>Full Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Date Of Birth</th>
+                <th>Nick Name</th>
+                <th>Type Of User </th>
+                <th>Premium</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              {{#each listUser}}
+              <tr>
+                <td>{{IDUser}}</td>
+                <td >{{FullName}}</td>
+                <td >{{Phone}}</td>
+                <td >{{Email}}</td>
+                <td >{{Address}}</td>
+                <td >{{#format_date_time DOB}}{{/format_date_time}}</td>
+                <td ><p class="badge badge-success">{{NickName}}</p> </td>
+                <td ><p class="badge badge-secondary">{{TypeName}}</p></td>
+                <td >{{#format_date_time DateEnd}}{{/format_date_time}}</td>
+                <td>{{#compare StatusName 'deleted'}}{{/compare}}</td>
+                <td>
+                  <a href="/manage/users/edit?id={{IDUser}}" class="text-warning"><i class="fas fa-edit"></i></a>
+                  <a id="{{IDUser}}" class="text-danger" onclick="delete_function(this.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  {{#compare_id TypeName 'editor'}}
+                  <a id="{{IDUser}}" class="text-info" href="/manage/users/editor?id={{IDUser}}" title="Change categories"><i class="fa fa-tags" aria-hidden="true"></i></a>
+                  {{/compare_id}}
+                  <a onclick="register_premium(this.id)" id="{{IDUser}}"class="text-success" title="Extend Premium"><i class="fa fa-child" aria-hidden="true"></i></a>
+                  
+                </td>
+                <form id = "myform{{IDUser}}" action="/manage/users/delete?id={{IDUser}}" method="POST"></form>
+                <form id='form{{IDUser}}' action="/manage/users/registerpremium?IDUser={{IDUser}}" method="POST"></form>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

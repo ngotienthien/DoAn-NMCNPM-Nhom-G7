@@ -1,0 +1,38 @@
+ <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-md-12">
+        <div class="card w-50 shadow mx-auto" style="background: none !important;">
+          <div class="card-body text-center">
+            <h1 class="card-title" style="color: green;">Register Premium</h1>
+            <h2>Click here to update user premium</h2>
+            <div class="my-4">
+            <form id="formReg" name="formReg" action="" method="POST">
+                <button type="submit"class="btn btn-primary btn-lg">
+                    <i class="fa fa-user-secret" aria-hidden="true"></i>
+                    Up to premium
+                </button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{#section 'js'}}
+<script>
+  $('#formReg').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+    url: window.location.href,
+    type: "POST",
+    data: "info=1",
+    success: function (data) {  
+      alert("Congratulation for you, your account became Premium!!!");
+      window.location.replace(data);
+    }
+    });
+  });
+</script>
+{{/section}}
+

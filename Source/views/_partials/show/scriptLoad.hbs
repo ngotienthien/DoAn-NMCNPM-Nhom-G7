@@ -1,0 +1,34 @@
+<!-- jQuery-2.2.4 js -->
+<script src="/assets/show/js/jquery/jquery-2.2.4.min.js"></script>
+<!-- Popper js -->
+<script src="/assets/show/js/bootstrap/popper.min.js"></script>
+<!-- Bootstrap js -->
+<script src="/assets/show/js/bootstrap/bootstrap.min.js"></script>
+<!-- All Plugins js -->
+<script src="/assets/show/js/plugins/plugins.js"></script>
+<!-- Active js -->
+<script src="/assets/show/js/active.js"></script>
+<script>
+  $('.dropdown-header').on({
+    mouseenter: function () {
+      $(this).addClass("show");
+      $('.dropdown-menu-header').addClass("show");
+      $('.vizew-main-menu').css("z-index", "-1");
+    },
+  });
+  $('.dropdown-menu-header').on('mouseleave', function () {
+    $('.vizew-main-menu').css("z-index", "1");
+    $('.dropdown-header').removeClass("show");
+    $('.dropdown-menu-header').removeClass("show");
+  })
+
+  $(document).ready(function () {
+    $(".abstract").each(function (i) {
+      var len = $(this).text().trim().length;
+      if (len > 100) {
+        $(this).text($(this).text().substr(0, 100) + '...');
+      }
+    });
+  });
+  
+</script>

@@ -1,0 +1,242 @@
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Login</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Breadcrumb Area End ##### -->
+
+<!-- ##### Login Area Start ##### -->
+<div class="vizew-login-area section-padding-80">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-6">
+                <div class="login-content">
+                    <!-- Section Title -->
+                    {{#if lcIsAuthenticated}}
+                    <div class="section-heading">
+                        <h4>You are already logged in</h4>
+                        <a href="/logout">Logout here</a>
+                        <div class="line"></div>
+                    </div>
+                    {{else}}
+                    {{#if isRegister}}
+                    <div class="section-heading">
+                        <h4>Your account was created</h4>
+                        <a class="btn btn-primary" href="../login">Please login</a>
+
+                    </div>
+                    {{else}}
+
+                    <div class="section-heading">
+                        <h4>Register account!</h4>
+                        <div class="line"></div>
+                    </div>
+
+                    <form action="register" method="post" name="form_register" id="form_register"
+                        onsubmit="return validateForm()">
+                        <div class="form-group text-center">
+                            <a href="/login-facebook" class="facebook text-primary"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
+                        </div>
+                        <div class="form-group">
+                            <label>User name</label>
+                            <input type="text" name="UserName" class="form-control" id="idUserName"
+                                placeholder="User Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="Password" class="form-control" id="idPassword"
+                                placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm password</label>
+                            <input type="password" name="ConfirmPassword" class="form-control" id="idConfirmPassword"
+                                placeholder="Confirm Password">
+                        </div>
+                        <div class="form-group">
+                            <label>Full name</label>
+                            <input type="text" name="FullName" class="form-control" id="idFullName"
+                                placeholder="Full Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" name="Phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="9" maxlength="11" class="form-control" id="idPhone" placeholder="Phone">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="Email" class="form-control" id="idEmail" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" name="Address" class="form-control" id="idAddress" placeholder="Address">
+                        </div>
+                        <div class="form-group">
+                            <label>Date of Birth</label>
+                            <input type="text" name="DOB" class="form-control" id="idDOB" placeholder="Date of birth">
+                        </div>
+                        <div class="form-group">
+                            <label></label>
+                            <div class="g-recaptcha" data-sitekey="6Lf0kb8ZAAAAAE5p33S6VJFdiONqOmIR5RRLB58C"
+                                id="captcha" name="captcha"></div>
+
+                        </div>
+
+                        <button type="submit" id="btnSubmit" class="btn vizew-btn w-100 mt-30">register</button>
+                    </form>
+
+                    {{/if}}
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ##### Login Area End ##### -->
+
+{{#section 'css'}}
+<link rel="stylesheet" type="text/css" href="/assets/datetimepicker-master/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css" href="/assets/datetimepicker-master/jquery.datetimepicker.css" />
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{{/section}}
+
+{{#section 'js'}}
+<script src="/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+<script>
+    $('#idDOB').datetimepicker({
+        format: 'd/m/Y',
+        timepicker: false,
+        mask: true,
+    });
+</script>
+<script>
+    function validateForm() {
+        var countError = 0;
+        var UserName = document.forms["form_register"]["UserName"];
+        var Password = document.forms["form_register"]["Password"];
+        var ConfirmPassword = document.forms["form_register"]["ConfirmPassword"];
+        var FullName = document.forms["form_register"]["FullName"];
+        var Phone = document.forms["form_register"]["Phone"];
+        var Email = document.forms["form_register"]["Email"];
+        var Address = document.forms["form_register"]["Address"];
+        var DOB = document.forms["form_register"]["DOB"];
+        var capcha = document.forms["form_register"]["captcha"];
+        var listClassError = document.getElementsByClassName("error");
+        var v = grecaptcha.getResponse();
+        for (i = 0; i < listClassError.length; i++) {
+            listClassError[i].remove();
+            i--;
+        }
+      
+        if (UserName.value.length < 1) {
+            var spanUserName = document.createElement("span");
+            spanUserName.innerHTML = "This field is required";
+            spanUserName.className = "error error-user text-danger";
+            UserName.after(spanUserName);
+            countError++;
+        }
+        if (Password.value.length < 8) {
+            var spanPassword = document.createElement("span");
+            spanPassword.innerHTML = "Length of password more than 8 character";
+            spanPassword.className = "error text-danger";
+            Password.after(spanPassword);
+            countError++;
+        }
+        if (ConfirmPassword.value.length < 8) {
+            var spanConfirmPassword = document.createElement("span");
+            spanConfirmPassword.innerHTML = "Length of confirm password more than 8 character";
+            spanConfirmPassword.className = "error text-danger";
+            ConfirmPassword.after(spanConfirmPassword);
+            countError++;
+        }
+        if (FullName.value.length < 1) {
+            var spanFullName = document.createElement("span");
+            spanFullName.innerHTML = "This field is required";
+            spanFullName.className = "error text-danger";
+            FullName.after(spanFullName);
+            countError++;
+        }
+        if (Phone.value.length < 1 || Phone.value.length > 11) {
+            var spanPhone = document.createElement("span");
+            spanPhone.innerHTML = "Phone invalid";
+            spanPhone.className = "error text-danger";
+            Phone.after(spanPhone);
+            countError++;
+        }
+        if (Email.value.length < 1) {
+            var spanEmail = document.createElement("span");
+            spanEmail.innerHTML = "This field is required";
+            spanEmail.className = "error text-danger";
+            Email.after(spanEmail);
+            countError++;
+        } else {
+            var regEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+            var validEmail = regEx.test(Email.value);
+            if (!validEmail) {
+                var spanEmail = document.createElement("span");
+                spanEmail.innerHTML = "Email is invalid";
+                spanEmail.className = "error text-danger";
+                Email.after(spanEmail);
+                countError++;
+            }
+        }
+        if (Address.value.length < 1) {
+            var spanAddress = document.createElement("span");
+            spanAddress.innerHTML = "This field is required";
+            spanAddress.className = "error text-danger";
+            Address.after(spanAddress);
+            countError++;
+        }
+        if (DOB.value.length < 1 || DOB.value == "__/__/____") {
+            var spanDOB = document.createElement("span");
+            spanDOB.innerHTML = "This field is required";
+            spanDOB.className = "error text-danger";
+            DOB.after(spanDOB);
+            countError++;
+        }
+        if (Password.value !== ConfirmPassword.value) {
+            var spanConfirmPassword2 = document.createElement("span");
+            spanConfirmPassword2.innerHTML = "Confirm password was wrong";
+            spanConfirmPassword2.className = "error text-danger";
+            ConfirmPassword.after(spanConfirmPassword2);
+            countError++;
+        }
+        if (v.length == 0) {
+            alert("Please complete the CAPTCHA correctly");
+            countError++;
+        }
+        if (countError >= 1)
+            return false;
+
+        return true;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#idUserName").change(function () {
+            $.post("subscriber/checkUserName",
+                {
+                    UserName: $("#idUserName").val(),
+                },
+                function (data, status) {
+                    $(".error-user").remove();
+                    if (data == true) {
+                        $("#btnSubmit").prop('disabled', true);
+                        $("#idUserName").after("<span class='error-user text-danger'>Username already exist</span>")
+                    } else {
+                        $("#btnSubmit").prop('disabled', false);
+                    }
+                });
+        });
+    });
+</script>
+{{/section}}

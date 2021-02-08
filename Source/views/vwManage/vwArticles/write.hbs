@@ -1,0 +1,158 @@
+{{#section 'css'}}
+
+<link href="../../../assets/manager/css/tagsinput.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="../../../assets/manager/css/bootstrap-multiselect.css" type="text/css">
+<style>
+  .multiselect-selected-text {
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+  }
+
+  .btn:focus {
+    box-shadow: none !important;
+  }
+</style>
+{{/section}}
+
+{{#section 'js'}}
+<script src="https://cdn.tiny.cloud/1/0imibk9rxeibkopvukg7vtjuvonhn4dazgh1n06mw7nufuui/tinymce/5/tinymce.min.js"
+  referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: '#txtFullDes',
+    plugins: 'image code',
+    height: 450,
+    image_title: true, 
+    automatic_uploads: true,
+    plugins: 'paste image link autolink lists table media',
+    menubar: false,
+    toolbar: [
+      'undo redo | bold italic underline strikethrough | numlist bullist | alignleft aligncenter alignright | forecolor backcolor | table link image media',
+    ],
+    file_picker_types: 'image',
+  file_picker_callback: function(cb, value, meta) {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/*');
+
+    input.onchange = function() {
+      var file = this.files[0];
+      var reader = new FileReader();
+      
+      reader.onload = function () {
+        var id = 'blobid' + (new Date()).getTime();
+        var blobCache =  tinymce.activeEditor.editorUpload.blobCache;
+        var base64 = reader.result.split(',')[1];
+        var blobInfo = blobCache.create(id, file, base64);
+        blobCache.add(blobInfo);
+
+        // call the callback and populate the Title field with the file name
+        cb(blobInfo.blobUri(), { title: file.name });
+      };
+      reader.readAsDataURL(file);
+    };
+     
+    input.click();
+  }
+  });
+
+  
+</script>
+<script src="../../../assets/manager/js/tagsinput.js"></script>
+<script type="text/javascript" src="../../../assets/manager/js/bootstrap-multiselect.js"></script>
+<script>
+  $('#write').submit(function(event){
+    let i = $('#tag').tagsinput('items');
+    $('#tag').val(i)
+  });
+
+</script>
+<script>
+ function validateForm() {
+
+        
+        var fi = document.getElementById('file');
+        if (fi.files.length <= 0) {      // FIRST CHECK IF ANY FILE IS SELECTED.
+           var spanImage = document.createElement("span");
+                    spanImage.innerHTML = "have not uploaded the file yet";
+                    spanImage.className = "error text-danger";
+                    fi.after(spanImage);
+        
+
+          return false
+        }
+        else
+        {
+          return true
+        }
+    }
+</script>
+
+{{/section}}
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/articles/listdraft">Article</a></li>
+      <li class="breadcrumb-item active">Write</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+          <h2>Articles <b>Write</b></h2>
+        </div>
+      </div>
+      <div class="card-body">
+        <form method="post" name="form_write" action="" enctype="multipart/form-data" id="write" onsubmit="return validateForm()">
+          <div class="form-group">
+            <label class="big mb-1 " for="title">Title</label>
+            <input class="form-control py-4" id="title" type="text" name="title" placeholder="Enter title" required>
+          </div>
+          <div class="form-group">
+            <label class="big mb-1" for="abstract">Abstract</label>
+            <textarea class="form-control" rows="5" id="abstract" name="abstract" required></textarea>
+          </div>
+          <div class="form-group">
+            <label class="big mb-1" for="content">Content</label>
+            <textarea name="FullDes" id="txtFullDes" class="form-control" name="content" cols="30" rows="10"></textarea>
+          </div>
+          <div class="form-group ">
+            <label for="" class="big mb-1">Tag</label>
+            <input type="text" value="" data-role="tagsinput" class="form-control" name="tag" id="tag" required>
+            {{!-- <select multiple data-role="tagsinput" onchange="" class="form-control d-inline" name="tag" id="tag"> --}}
+            </select>
+          </div>
+          <div class="form-group ">
+            <label for="" class="big mb-1">Sub_Category</label>
+            <select id="sub_category" name="sub_category" class="ml-3  border-color: coral">
+              {{#each listCate}}
+              <optgroup label="{{CategoryName}}">
+              {{#each ../listSubCate}}
+              {{#compare_id IDCategory ../IDCategory}}
+              <option value="{{IDSubCategory}}">{{SubCategoryName}}</option>
+              {{/compare_id}}
+              {{/each}}
+              </optgroup>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="" class="big mb-1">Ảnh bìa</label>
+            <input type="file" name="image" id="file" class="input-group input-file" />
+            <p id="fileInfo"></p>
+          </div>
+          
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="Pre" id="Pre" value="1">
+            <label class="form-check-label" for="Pre">Premium</label>
+          </div>
+          <button type="submit" class="btn btn-lg btn-success btn-block">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            Post
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Title -->
+  <title>Newspaper Online</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/assets/show/core-img/favicon.ico">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="/assets/show/css/style.css">
+
+  {{{_sections.css}}}
+
+</head>
+
+<body>
+
+  <!-- ##### Breadcrumb Area End ##### -->
+  <!-- ##### Header Area Start ##### -->
+  <header class="header-area">
+    {{> show/header}}
+    {{> show/nav}}
+
+  </header>
+  <!-- ##### Header Area End ##### -->
+
+
+
+  <!-- ##### Body Area Start ##### -->
+  {{{body}}}
+  <!-- ##### Body Area End ##### -->
+
+  <!-- ##### Footer Area Start ##### -->
+  {{> show/footer}}
+  <!-- ##### Footer Area End ##### -->
+
+  <!-- ##### All Javascript Script ##### -->
+  {{> show/scriptLoad}}
+  {{{_sections.js}}}
+</body>
+
+</html>

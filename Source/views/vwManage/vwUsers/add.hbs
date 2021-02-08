@@ -1,0 +1,207 @@
+
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/users/list">User</a></li>
+      <li class="breadcrumb-item active">Add User</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+          <h2>User <b>Add</b></h2>
+        </div>
+      </div>
+      <div class="card-body">
+            <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                        <form action="/manage/users/add" method="post"  name="form" onsubmit="return validateForm()">
+                        <div class="form-group">
+                            <label>Full name</label>
+                            <input type="text" name="fullname" class="form-control text-dark"  placeholder="full name" >
+                        </div>
+                        <div class="form-group">
+                            <label>User name</label>
+                            <input id="idUserName" type="text" name="username" class="form-control text-dark" placeholder="User Name" >
+                        </div>
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control text-dark" placeholder="Password" >
+                        </div>
+                        <div class="form-group">
+                            <label>Comfirm Password</label>
+                            <input type="password" name="comfirmPassword" class="form-control text-dark" placeholder="Comfirm Password" >
+                        </div>
+                         <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" name="email" class="form-control text-dark"  placeholder="Email@gmail.com" >
+                            
+                        </div>
+                         <div class="form-group">
+                            <label>Date of birth</label>
+                            <input type="date" name="DOBirth" class="form-control text-dark" >
+                        </div>
+                        <div class="form-group">
+                            <label>Phone</label>
+                            <input type="text" name="phone" class="form-control text-dark"  placeholder="Phone" >
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" name="address"class="form-control text-dark"   placeholder="Address" >
+                        </div>
+                        <div class="form-group ">
+                            <label for="" class="big mb-1">Role</label>
+                            <select id="typeofuser" style="border-radius: 5px;" name="typeofuser" class="ml-3  border-color: coral">
+                            {{#each listTypeOfUser}}
+                            <option value="{{IDType}}">{{TypeName}}</option>
+                            {{/each}}
+                            </select>
+                        </div>
+                        <button type="submit" id="btnSubmit" class="btn btn-lg btn-success btn-block">
+                            <i class="fa fa-check" aria-hidden="true"></i>
+                            Submit
+                        </button>
+                        </form>
+                    </div>
+                </div>
+            <!--/col-9-->
+            </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+{{#section 'css'}}
+    <link rel="stylesheet" type="text/css" href="/assets/datetimepicker-master/jquery.datetimepicker.css"/ >
+{{/section}}
+
+{{#section 'js'}}
+<script src="/assets/datetimepicker-master/build/jquery.datetimepicker.full.min.js"></script>
+<script>
+  
+    $('.CDOB').datetimepicker({     
+        format: 'd/m/Y',
+        timepicker: false,
+        mask:true,
+    });
+</script>
+<script>
+ 
+        function validateForm(){
+            var countError = 0;
+            var UserName = document.forms["form"]["username"];
+            var Password = document.forms["form"]["password"];
+            var ConfirmPassword = document.forms["form"]["comfirmPassword"];
+            var FullName = document.forms["form"]["fullname"];
+            var Phone = document.forms["form"]["phone"];
+            var Email = document.forms["form"]["email"];
+            var Address = document.forms["form"]["address"];
+            var DOB = document.forms["form"]["DOBirth"];
+            var listClassError = document.getElementsByClassName("error");
+            for(i = 0; i <listClassError.length; i++){
+                listClassError[i].remove();
+                i--;
+            }
+            if (UserName.value.length < 1) {
+                var spanUserName = document.createElement("span");
+                spanUserName.innerHTML = "This field is required";
+                spanUserName.className = "error error-user text-danger";
+                UserName.after(spanUserName);
+                countError++;
+            }
+            if (Password.value.length < 1) {
+                var spanPassword = document.createElement("span");
+                spanPassword.innerHTML = "This field is required";
+                spanPassword.className = "error text-danger";
+                Password.after(spanPassword);
+                countError++;
+            }
+            if (ConfirmPassword.value.length < 1) {
+                var spanConfirmPassword = document.createElement("span");
+                spanConfirmPassword.innerHTML = "This field is required";
+                spanConfirmPassword.className = "error text-danger";
+                ConfirmPassword.after(spanConfirmPassword);
+                countError++;
+            }
+            if (FullName.value.length < 1) {
+                var spanFullName = document.createElement("span");
+                spanFullName.innerHTML = "This field is required";
+                spanFullName.className = "error text-danger";
+                FullName.after(spanFullName);
+                countError++;
+            }
+            if (Phone.value.length < 1) {
+                var spanPhone = document.createElement("span");
+                spanPhone.innerHTML = "This field is required";
+                spanPhone.className = "error text-danger";
+                Phone.after(spanPhone);
+                countError++;
+            }
+            if (Email.value.length < 1) {
+                var spanEmail= document.createElement("span");
+                spanEmail.innerHTML = "This field is required";
+                spanEmail.className = "error text-danger";
+                Email.after(spanEmail);
+                countError++;
+            } else {
+               var regEx = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+                var validEmail = regEx.test(Email.value);
+                if (!validEmail) {
+                    var spanEmail = document.createElement("span");
+                    spanEmail.innerHTML = "Email is invalid";
+                    spanEmail.className = "error text-danger";
+                    Email.after(spanEmail);
+                    countError++;
+                }
+            }
+            if (Address.value.length < 1) {
+                var spanAddress = document.createElement("span");
+                spanAddress.innerHTML = "This field is required";
+                spanAddress.className = "error text-danger";
+                Address.after(spanAddress);
+                countError++;
+            }
+            if (DOB.value.length < 1 || DOB.value == "__/__/____") {
+                var spanDOB = document.createElement("span");
+                spanDOB.innerHTML = "This field is required";
+                spanDOB.className = "error text-danger";
+                DOB.after(spanDOB);
+                countError++;
+            }
+            if (Password.value !== ConfirmPassword.value) {
+                var spanConfirmPassword2 = document.createElement("span");
+                spanConfirmPassword2.innerHTML = "Confirm password was wrong";
+                spanConfirmPassword2.className = "error text-danger";
+                ConfirmPassword.after(spanConfirmPassword2);
+                countError++;
+            }
+            
+            if (countError >= 1)       
+                return false ;
+            return true;
+        }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $("#idUserName").change(function(){
+            $.post("/manage/users/checkUserName",
+            {
+                UserName: $("#idUserName").val(),
+            },
+            function(data,status){
+                $(".error-user").remove();
+                if(data == true)
+                {     
+                    $("#btnSubmit").prop('disabled', true);
+                    $("#idUserName").after("<span class='error-user text-danger'>Username already exist</span>")
+                }else{
+                    $("#btnSubmit").prop('disabled', false);
+                }
+            });       
+           
+        });
+});
+</script>
+{{/section}}

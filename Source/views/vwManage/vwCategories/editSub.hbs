@@ -1,0 +1,41 @@
+
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/categories/list">Category</a></li>
+      <li class="breadcrumb-item active">Edit Sub Category</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+          <h2>Sub Category <b>Edit</b></h2>
+        </div>
+      </div>
+      <div class="card-body">
+        <form method="post" action="">
+        <div class="form-group">
+            <label class="big mb-1 " for="id">Sub Category ID</label>
+            <input class="form-control py-4" id="id" type="text" name="SubCategoryID" value="{{listSubCate.IDSubCategory}}" readonly/>
+        </div>
+          <div class="form-group ">
+            <label for="" class="big mb-1">Category</label>
+            <select id="category" name="category" class="ml-3  border-color: coral">
+              {{#each listCate}}
+              <option value="{{IDCategory}}"  {{#compare_id IDCategory ../listSubCate.IDCategory}}selected{{/compare_id}}>{{CategoryName}}</option>
+              {{/each}}
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="big mb-1 " for="title">Sub Category Name</label>
+            <input class="form-control py-4" id="title" type="text" name="SubCategoryName" value="{{listSubCate.SubCategoryName}}" required/>
+          </div>
+          <button type="submit" class="btn btn-lg btn-success btn-block">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            Update
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

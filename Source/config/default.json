@@ -1,0 +1,20 @@
+{
+  "mysql": {
+    "host": "localhost",
+    "port": 3306,
+    "user": "root",
+    "password": "",
+    "database": "newspaperdb",
+    "connectionLimit": 50
+  },
+  "pagination": {
+    "limit": 6
+  },
+  "authentication": {
+    "saltRounds": 8
+  },
+
+  "premium": {
+    "timeout": 7
+  }
+}

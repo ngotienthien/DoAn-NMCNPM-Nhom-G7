@@ -1,0 +1,60 @@
+
+
+<!-- ##### Post Details Area Start ##### -->
+<section class="post-details-area mb-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="post-details-thumb mb-50">
+          <img src="../../../public/images/{{Post.BigAvatar}}" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-left">
+      <!-- Post Details Content Area -->
+      <div class="col-12 col-lg-8 col-xl-7">
+        <div class="post-details-content">
+          <!-- Blog Content -->
+          <div class="blog-content" id="content">
+
+            <div class="post-content mt-0">
+              <h1>{{Post.Title}}</h1>
+            </div>
+            <!-- Post Content -->
+            {{{Post.Content}}}
+
+            <!-- Post Tags -->
+            <div class="post-tags mt-30">
+              <ul style="display: flex;list-style-type:none;">
+                <h4><i>Tags: &nbsp;</i></h4>
+                {{#each Tags}}
+                <li style="display: list-item;
+    text-align: -webkit-match-parent;"><a href="/tag/{{IDTag}}" style="
+    display: inline-block;
+    background-color: #393c3d;
+    padding: 5px 12px;
+    border-radius: 2px;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #a6a6a6;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin: 3px;">{{TagName}}</a></li>
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+{{#section 'js'}}
+<script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.min.js'></script>
+<!-- html-to-pdfmake file: -->
+<script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/docs/browser.js"></script>
+{{/section}}

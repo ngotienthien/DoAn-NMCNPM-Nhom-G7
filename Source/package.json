@@ -1,0 +1,44 @@
+{
+  "name": "project_ltw02",
+  "version": "1.0.0",
+  "description": "Xây dựng website Newspaper Online",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/1760322/DoAn_LTW02.git"
+  },
+  "author": "1760322, 1760335, 1760407, 1760428",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/1760322/DoAn_LTW02/issues"
+  },
+  "homepage": "https://github.com/1760322/DoAn_LTW02#readme",
+  "dependencies": {
+    "acl": "^0.4.11",
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-handlebars": "^4.0.3",
+    "express-handlebars-sections": "^1.0.1",
+    "express-session": "^1.17.1",
+    "lru-cache": "^6.0.0",
+    "moment": "^2.27.0",
+    "multer": "^1.4.2",
+    "mysql": "^2.18.1",
+    "nodemailer": "^6.4.11",
+    "numeral": "^2.0.6",
+    "passport": "^0.4.1",
+    "passport-facebook": "^3.0.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "sharp": "^0.25.4",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}

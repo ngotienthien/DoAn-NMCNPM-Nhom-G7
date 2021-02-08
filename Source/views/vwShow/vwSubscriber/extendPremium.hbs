@@ -1,0 +1,38 @@
+ <div class="container h-100">
+    <div class="row h-100 align-items-center">
+      <div class="col-md-12">
+        <div class="card w-50 shadow mx-auto" style="background: none !important;">
+          <div class="card-body text-center">
+            <h1 class="card-title" style="color: green;">Extend Premium</h1>
+            <h2>Click here to extend premium</h2>
+            <div class="my-4">
+            <form id="formExtend" method="POST">
+                <button type="submit" class="btn btn-primary btn-lg">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    Extend Premium
+                </button>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{{#section 'js'}}
+<script>
+  $('#formExtend').on('submit', function (e) {
+    e.preventDefault();
+    $.ajax({
+    url: window.location.href,
+    type: "POST",
+    data: "info=1",
+    success: function (data) {  
+      alert("Congratulation, Your account has been renewed Premium!!!");
+      window.location.replace(data);
+    }
+    });
+  });
+</script>
+{{/section}}

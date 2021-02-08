@@ -1,0 +1,106 @@
+    <!-- ##### Breadcrumb Area Start ##### -->
+    <div class="vizew-breadcrumb">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Login</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ##### Breadcrumb Area End ##### -->
+
+    <!-- ##### Login Area Start ##### -->
+    <div class="vizew-login-area section-padding-80">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6">
+                    <div class="login-content">
+                        <!-- Section Title -->
+
+                        {{#if lcIsAuthenticated}}
+                            <div class="section-heading">
+                                <h4>You are already logged in</h4>
+                                <a href="/logout">Logout here</a>
+                                <div class="line"></div>
+                            </div>
+                        {{else}}
+
+                            <div class="section-heading">
+                                
+                                <h4>Great to have you back!</h4>
+             
+                                <div class="line"></div>
+                            </div>
+
+                            <form method="post" name="form_login" onsubmit="return validateFormLogin()">
+                                <div class="form-group text-center">
+                                    <a href="login-facebook">facebook</a>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="username" autofocus class="form-control" id="exampleInputEmail1" placeholder="User Name">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                                <span class="text-danger">{{notificationLogin}}</span>
+                                <div class="form-group">
+                                    <div class="custom-control custom-checkbox mr-sm-2">
+                                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                        <label class="custom-control-label" for="customControlAutosizing">Remember me</label>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn vizew-btn w-100 mt-30">Login</button>
+                            </form>
+
+                        {{/if}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {{#section 'js'}}
+        <script>
+            function validateFormLogin(){
+                var countError = 0;
+                var UserName = document.forms["form_login"]["username"];
+                var Password = document.forms["form_login"]["password"];
+
+                var listClassError = document.getElementsByClassName("error");
+
+                for(i = 0; i <listClassError.length; i++){
+                    listClassError[i].remove();
+                    i--;
+                }
+
+                if (UserName.value.length < 1) {
+                    var spanUserName = document.createElement("span");
+                    spanUserName.innerHTML = "This field is required";
+                    spanUserName.className = "error text-danger";
+                    UserName.after(spanUserName);
+                    countError++;
+                }
+                if (Password.value.length < 1) {
+                    var spanPassword = document.createElement("span");
+                    spanPassword.innerHTML = "This field is required";
+                    spanPassword.className = "error text-danger";
+                    Password.after(spanPassword);
+                    countError++;
+                }
+        
+                if (countError >= 1)       
+                    return false ;
+                
+
+                return true;
+        }
+        </script>
+    {{/section}}
+    <!-- ##### Login Area End ##### -->

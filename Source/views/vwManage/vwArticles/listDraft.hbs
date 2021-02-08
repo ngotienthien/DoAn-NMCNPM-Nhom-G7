@@ -1,0 +1,185 @@
+{{#section 'js'}}
+<script>
+   $(document).ready(function ()
+      { $(".class-span").each(function(i){
+           var len=$(this).text().trim().length;
+           if(len>100)
+           {
+               $(this).text($(this).text().substr(0,100)+'...');
+           }
+       });
+    });
+    function delete_function(id) {
+      var choice = confirm('Are you sure you delete article with ID: ' + id);
+         if (choice) {
+             document.getElementById('myform'+id.toString()).submit();
+          }
+    }
+    function pass_id(id)
+    {
+      $('#exampleModalLabel').text("Approve Article ID: "+id)
+      $('#IDArticle').val(id)
+    }
+
+    $('#status').on('change', function(){
+      if($(this).val() == '3')
+      {
+        $('#label_for_tmp').remove()
+        $('#tmp').remove()
+        $('#label_for_tmp2').remove()
+        $('#tmp2').remove()
+        $('#form').attr('action','/manage/articles/publish')
+        $('#form').append('<label for="tmp" id="label_for_tmp">Date publish</label>' +
+        '<input id="tmp" type="Date" name="TimePublish" class="form-control"/>' + 
+        '<label for="tmp2" id="label_for_tmp2">Time publish</label>' +
+        '<input id="tmp2" type="Time" name="Time" class="form-control"/>')
+        $('#form').attr('method','post')
+      } 
+      if($(this).val() == '4')
+      {
+        $('#label_for_tmp').remove()
+        $('#tmp').remove()
+        $('#label_for_tmp2').remove()
+        $('#tmp2').remove()
+        $('#form').attr('action','/manage/articles/publishNow')
+        $('#form').attr('method','post')
+      }
+      else if($(this).val() == '5')
+      {
+        $('#label_for_tmp').remove()
+        $('#tmp').remove()
+        $('#label_for_tmp2').remove()
+        $('#tmp2').remove()
+        $('#form').attr('action','/manage/articles/deny')
+        $('#form').append('<label for="tmp" id="label_for_tmp">Reason</label>' +
+        '<input id="tmp" type="text" name="Reason" class="form-control"/>')
+        $('#form').attr('method','post')
+      }
+    })
+
+    $('#save').on('click', function()
+    {
+     $("#form").submit()
+    })
+</script>
+{{/section}}
+
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/articles/listdraft">Article</a></li>
+      <li class="breadcrumb-item active">List Draft</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+            <h2>Articles <b>List Draft</b></h2>
+        </div>
+        {{#if success}}
+          <div class="alert alert-success" role="alert">
+            {{success}}
+          </div>
+        {{/if}}
+      </div>
+
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Abstract</th>
+                <th>Author</th>
+                <th>Categories</th>
+                <th>Tags</th>
+                <th>Approve</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Abstract</th>
+                <th>Author</th>
+                <th>Categories</th>
+                <th>Tags</th>
+                <th>Approve</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              {{#each ListDraft}}
+                <tr>
+                  <td>{{IDArticle}}</td>
+                  <td>{{Title}}</td>
+                  <td class="class-span">{{Abstract}}</td>
+                  <td><p class="badge badge-success">{{NickName}}</p> </td>
+                    <td>
+                        {{#each ../ListDraftCategory }}
+                        {{#compare_id id ../IDArticle}}
+                            <p class="badge badge-secondary">{{CategoryName}}</p>
+                            {{/compare_id}}
+                        {{/each}}
+                    </td>
+                    <td>
+                        {{#each ../ListDraftTag }}
+                           {{#compare_id id ../IDArticle}}
+                            <p class="badge badge-info">{{TagName}}</p>
+                            {{/compare_id}}
+                        {{/each}}
+                    </td>
+                  <td><button type="button" name='{{IDArticle}}'class="btn btn-primary" onclick=pass_id(this.name) data-toggle="modal" data-target="#exampleModal">
+                  {{StatusName}}
+                  </button></td>
+                  <td>
+                    <a href="/manage/articles/details?id={{IDArticle}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="/manage/articles/edit?id={{IDArticle}}" class="text-warning"><i class="fas fa-edit"></i></a>
+                    <a id="{{IDArticle}}" class="text-danger"  onclick="delete_function(this.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  </td>
+                  <form id = "myform{{IDArticle}}" action="/manage/articles/delete?id={{IDArticle}}" method="POST"></form>
+                </tr>
+              {{/each}}
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id= 'form' method="POST" action="/manage/articles/publish">
+          <label for="tmp" id='label_for_tmp'>Date publish</label>
+          <input id="tmp" name='Date'type="Date" class="form-control"/>
+          <label for="tmp2" id="label_for_tmp2">Time publish</label>
+          <input id="tmp2" type="Time" name="Time" class="form-control"/>
+          <input class='form-control' name="IDArticle"id="IDArticle" type="text" hidden/>
+          <label for="status">Select</label>
+          <select class="custom-select" name="status" id="status">
+            <option value="3">Publish</option>
+            <option value="4">Publish Now</option>
+            <option value="5">Deny</option>
+           </select>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-primary"id="save">Save</button>
+         
+      </div>
+    </div>
+  </div>
+</div>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,51 @@
+
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/users/list">User</a></li>
+      <li class="breadcrumb-item active">Change Categories For Editor</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+          <h2>Editor <b>Categories Management</b></h2>
+        </div>
+      </div>  
+      <div class="card-body">
+        <form method="post" action="/manage/users/editor">
+        <div class="form-group">
+            <label class="big mb-1 " for="IDUser">User ID</label>
+            <input class="form-control py-4" id="id" type="text" name="IDUser" value="{{editor.IDUser}}" readonly/>
+        </div>
+          <div class="form-group">
+            <label class="big mb-1 " for="UserName">Full Name</label>
+            <input class="form-control py-4" id="name" type="text" name="UserName" value="{{editor.FullName}}" readonly/>
+          </div>
+          <div class="form-group">
+            <label class="big mb-1 " >Categories Management</label>
+            {{#if isOkay}}
+              {{#each list_cate}}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="IDCate" id="{{IDCategory}}" value="{{IDCategory}}" {{#each ../list_editor_cate}}{{#compare_id IDCategory ../IDCategory}}checked{{/compare_id}}{{/each}}>
+                  <label class="form-check-label" for="{{IDCategory}}">{{CategoryName}}</label>
+                </div>
+              {{/each}}
+            {{else}}
+              {{#each list_cate}}
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="IDCate" id="{{IDCategory}}" value="{{IDCategory}}" >
+                  <label class="form-check-label" for="{{IDCategory}}">{{CategoryName}}</label>
+                </div>
+              {{/each}}
+            {{/if}}
+          </div>
+          <button type="submit" class="btn btn-lg btn-success btn-block">
+            <i class="fa fa-check" aria-hidden="true"></i>
+            Assign
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,73 @@
+    <div id="layoutSidenav_nav">
+        <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+            <div class="sb-sidenav-menu">
+                <div class="nav">
+                    <div class="sb-sidenav-menu-heading">Core</div>
+                    <a class="nav-link" href="/manage/">
+                        <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                        Dashboard
+                    </a>
+                    <div class="sb-sidenav-menu-heading">Interface</div>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseArticles" aria-expanded="false" aria-controls="collapseLayouts">
+                        <div class="sb-nav-link-icon"><i class="far fa-newspaper"></i></div>
+                        Articles
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseArticles" aria-labelledby="headingOne" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="/manage/articles/listdraft"><i class="fas fa-table mr-2"></i>List Draft</a>
+                            <a class="nav-link" href="/manage/articles/listdenied"><i class="fas fa-table mr-2"></i>List Denied</a>
+                            <a class="nav-link" href="/manage/articles/listapproved"><i class="fas fa-table mr-2"></i>List Approved</a>
+                            <a class="nav-link" href="/manage/articles/listpublished"><i class="fas fa-table mr-2"></i>List Published</a>
+                            {{#compare_id lcAuthUser.TypeName "adminitrator"}}
+                            <a class="nav-link" href="/manage/articles/write"><i class="fas fa-pen-alt mr-2"></i>Write</a>
+                            {{/compare_id}}
+                            {{#compare_id lcAuthUser.TypeName "writer"}}
+                            <a class="nav-link" href="/manage/articles/write"><i class="fas fa-pen-alt mr-2"></i>Write</a>
+                            {{/compare_id}}
+                        </nav>
+                    </div>
+                    {{#compare_id lcAuthUser.TypeName "adminitrator"}}
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseCategories" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Categories
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseCategories" aria-labelledby="headingTwo" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="/manage/categories/list"><i class="fas fa-table mr-2"></i>List</a>
+                            <a class="nav-link" href="/manage/categories/listSub"><i class="fas fa-table mr-2"></i>List Sub</a>
+                            <a class="nav-link" href="/manage/categories/add"><i class="fas fa-pen-alt mr-2"></i>Add</a>
+                            <a class="nav-link" href="/manage/categories/addSub"><i class="fas fa-pen-alt mr-2"></i>Add Sub</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTags" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Tags
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseTags" aria-labelledby="heading" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="/manage/tags/list"><i class="fas fa-table mr-2"></i>List</a>
+                        </nav>
+                    </div>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUsers" aria-expanded="false" aria-controls="collapsePages">
+                        <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
+                        Users
+                        <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+                    </a>
+                    <div class="collapse" id="collapseUsers" aria-labelledby="heading" data-parent="#sidenavAccordion">
+                        <nav class="sb-sidenav-menu-nested nav">
+                            <a class="nav-link" href="/manage/users/list"><i class="fas fa-address-card mr-2"></i>List</a>
+                            <a class="nav-link" href="/manage/users/add"><i class="fas fa-user-plus mr-2"></i>Add</a>
+                        </nav>
+                    </div>
+                    {{/compare_id}}
+                </div>
+            </div>
+            <div class="sb-sidenav-footer">
+                <div class="small">Logged in as:</div>
+                {{lcAuthUser.UserName}}
+            </div>
+        </nav>
+    </div>

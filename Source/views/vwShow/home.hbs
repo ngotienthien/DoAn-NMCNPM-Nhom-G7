@@ -1,0 +1,323 @@
+{{#section 'js'}}
+<script>
+  let data = {
+    current: 10,
+    limit: 5,
+  }
+  $(function () {
+    $('#loadMore').click(function (e) {
+      $.ajax({
+        type: 'post',
+        data: {data: data},
+        url: '/getMore',
+        success: function (getArticles) {
+          if (getArticles.length != 0) {
+            getArticles.forEach(function (item) {
+              let value = "<div class='single-post-area mb-30'>" +
+                "<div class='row align-items-center'>" +
+                "<div class='col-12 col-lg-6'>" +
+                "<a href='/articles/" + item.IDArticle + "'>" +
+                "<div class='post-thumbnail image_hover'>";
+              if (item.IsPremium == 1) {
+     
+                if({{IsUserPremium}})
+                {
+                  value = value + "<img src='../../public/images/" + item.Avatar + "' style='height: 215px!important;' class='nobur'>";
+                }
+                else{
+                  value = value + "<img src='../../public/images/" + item.Avatar + "' style='height: 215px!important;' class='bur'>";
+                }
+              }
+              else {
+                value = value + "<img src='../../public/images/" + item.Avatar + "' style='height: 215px!important;'>";
+              }
+              value = value + " </div>" +
+                " </a>" +
+                "</div>" +
+                "<div class='col-12 col-lg-6'>" +
+                "<div class='post-content mt-0'>" +
+                "<a href='/categories/" + item.IDCategory + "' class='post-cata cata-sm cata-success'>" + item.CategoryName + "</a>" + "    " +
+                "<a href='/subcategories/" + item.IDSubCategory + "'class='post-cata cata-sm cata-primary'>" + item.SubCategoryName + " </a>";
+              if (item.IsPremium == 1) {
+                value = value + "<a href='/articles/" + item.IDArticle + "' class='post-title mb-2'> " + item.Title + " <span class='badge badge-danger'> PREMIUM </span></a>";
+              }
+              else {
+                value = value + "<a href='/articles/" + item.IDArticle + "' class='post-title mb-2'> " + item.Title + " </a>";
+              }
+              value = value + " <div class='post-meta d-flex align-items-center mb-2'>" +
+                "<a href='#' class='post-author'>" + item.FullName + "</a>" +
+                "<i class='fa fa-circle' aria-hidden='true'></i>" +
+                "<a href='#' class='post-date'>" + item.TimePublish + "</a>" +
+                "</div>" +
+                "<p class='mb-2 abstract'>" +
+                "{{Abstract}}" +
+                "</p>" +
+                "<div class='post-meta d-flex'>" +
+                "<a href='/articles/" + item.IDArticle + "'><i class='fa fa-comments-o' aria-hidden='true'></i>" +
+                " " + item.numofCM + "</a>" +
+                "<a href='/articles/" + item.IDArticle + "'><i class='fa fa-eye' aria-hidden='true'></i> " + item.Views + "</a>" +
+                " <a href='/articles/" + item.IDArticle + "'><i class='fa fa-thumbs-o-up' aria-hidden='true'></i> " + item.Ranks + "</a>" +
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                "</div>" +
+                "</div> ";
+              $("#contentMore").append(value);
+            });
+            data.current = data.current + data.limit;
+          }
+          else {
+            alert("Has taken all the articles");
+            $('#loadMore').addClass("invisible");
+          }
+        }
+      });
+    })
+  });
+
+</script>
+{{/section}}
+<div class="vizew-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ##### Trending Posts Area Start ##### -->
+{{!-- Hiển thị 3 bài viết nổi bất nhất trong tuần qua --}}
+<section class="trending-posts-area">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <!-- Section Heading -->
+        <div class="section-heading">
+          <h4>Trending Newpapers</h4>
+          
+          <div class="line"></div>
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="row">
+      <!-- Single Blog Post -->
+      {{#each listTop3Trend}}
+      <div class="col-12 col-md-4">
+        <div class="single-post-area mb-80">
+          <!-- Post Thumbnail -->
+          <a href="/articles/{{IDArticle}}">
+            <div class="post-thumbnail image_hover">
+              <img src="../../public/images/{{Avatar}}" {{#if IsPremium}}  {{#unless ../isUserPremium}}
+                      class="bur"{{/unless}} {{/if}}>
+              <span class="video-duration">{{#format_date_time TimePublish}}{{/format_date_time}}</span>
+            </div>
+          </a>
+          <!-- Post Content -->
+          <div class="post-content">
+            <a href="/categories/{{IDCate}}" class="post-cata cata-sm cata-success">{{CategoryName}}</a>
+            <a href="/subcategories/{{IDSubCategory}}" class="post-cata cata-sm cata-primary">{{SubCategoryName}}</a>
+            <a href="/articles/{{IDArticle}}" class="post-title">{{Title}} {{#if IsPremium}}
+              <span class="badge badge-danger">PREMIUM</span>
+              {{/if}}</a>
+            <div class="post-meta d-flex">
+              <a href="/articles/{{IDArticle}}"><i class="fa fa-comments-o" aria-hidden="true"></i> {{numofCM}}</a>
+              <a href="/articles/{{IDArticle}}"><i class="fa fa-eye" aria-hidden="true"></i> {{Views}}</a>
+              <a href="/articles/{{IDArticle}}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{Ranks}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</section>
+<!-- ##### Trending Posts Area End ##### -->
+
+<!-- ##### Vizew Post Area Start ##### -->
+<section class="vizew-post-area mb-50">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-7 col-lg-8">
+        <div class="all-posts-area">
+          <!-- Section Heading -->
+          {{!-- New Article With top 10 category START --}}
+          <div class="section-heading style-2">
+            <h4>Featured Article</h4>
+            <div class="line"></div>
+          </div>
+          <div class="featured-post-slides owl-carousel mb-30">
+            {{#each ListNewArticleWithTopCate}}
+            
+            <div class="single-feature-post video-post bg-img ">
+              <img src="../../public/images/{{Avatar}}" class="{{#if IsPremium}} {{#unless ../isUserPremium}}
+                      bur{{/unless}} {{/if}}"/>
+              <!-- Post Content -->
+              <div class="post-content">
+                <a href="/categories/{{IDCate}}" class="post-cata cata-sm cata-success">{{CategoryName}}</a>
+                <a href="/subcategories/{{IDSubCategory}}"
+                  class="post-cata cata-sm cata-primary">{{SubCategoryName}}</a>
+                <a href="/articles/{{IDArticle}}" class="post-title hoverRed">{{Title}} {{#if IsPremium}}
+                  <span class="badge badge-danger">PREMIUM</span>
+                  {{/if}}</a>
+                <div class="post-meta d-flex">
+                  <a href="/articles/{{IDArticle}}"><i class="fa fa-comments-o" aria-hidden="true"></i>
+                    {{numofCM}}</a>
+                  <a href="/articles/{{IDArticle}}"><i class="fa fa-eye" aria-hidden="true"></i> {{Views}}</a>
+                  <a href="/articles/{{IDArticle}}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    {{Ranks}}</a>
+                </div>
+              </div>
+              <!-- Video Duration -->
+              <span class="video-duration">{{#format_date_time TimePublish}}{{/format_date_time}}</span>
+            </div>     
+            {{/each}}
+          </div>
+          <!-- Featured Post Slides -->
+
+
+          <div class="row">
+            <!-- Single Blog Post -->
+            {{#each ListNewArticleWithTopCate}}
+            <div class="col-12 col-md-6">
+              <div class="single-post-area mb-80">
+                <!-- Post Thumbnail -->
+                <a href="/articles/{{IDArticle}}">
+                  <div class="post-thumbnail image_hover">
+                    <img src="../../public/images/{{Avatar}}"  {{#if IsPremium}}  {{#unless ../isUserPremium}}
+                      class="bur"{{/unless}} {{/if}}>
+                    <span class="video-duration">{{#format_date_time TimePublish}}{{/format_date_time}}</span>
+                  </div>
+                </a>
+
+                <!-- Post Content -->
+                <div class="post-content">
+                  <a href="/categories/{{IDCate}}" class="post-cata cata-sm cata-success">{{CategoryName}}</a>
+                  <a href="/subcategories/{{IDSubCategory}}"
+                    class="post-cata cata-sm cata-primary">{{SubCategoryName}}</a>
+                  <a href="/articles/{{IDArticle}}" class="post-title hoverRed">{{Title}} {{#if IsPremium}}
+                    <span class="badge badge-danger">PREMIUM</span>
+                    {{/if}}</a>
+                  <div class="post-meta d-flex">
+                    <a href="/articles/{{IDArticle}}"><i class="fa fa-comments-o" aria-hidden="true"></i>
+                      {{numofCM}}</a>
+                    <a href="/articles/{{IDArticle}}"><i class="fa fa-eye" aria-hidden="true"></i> {{Views}}</a>
+                    <a href="/articles/{{IDArticle}}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                      {{Ranks}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+
+          <!-- Section Heading -->
+          <div class="section-heading style-2">
+            <h4>Latest News</h4>
+            <div class="line"></div>
+          </div>
+          {{#each listNewTime}}
+          <div class="single-post-area mb-30">
+            <div class="row align-items-center">
+              <div class="col-12 col-lg-6">
+                <!-- Post Thumbnail -->
+                <a href="/articles/{{IDArticle}}">
+                  <div class="post-thumbnail image_hover">
+                    <img src="../../public/images/{{Avatar}}" {{#if IsPremium}}  {{#unless ../isUserPremium}}
+                      class="bur"{{/unless}} {{/if}}
+                      style="height: 215px!important;">
+                  </div>
+                </a>
+              </div>
+              <div class="col-12 col-lg-6">
+                <!-- Post Content -->
+                <div class="post-content mt-0">
+                  <a href="/categories/{{IDCate}}" class="post-cata cata-sm cata-success">{{CategoryName}}</a>
+                  <a href="/subcategories/{{IDSubCategory}}"
+                    class="post-cata cata-sm cata-primary">{{SubCategoryName}}</a>
+                  <a href="/articles/{{IDArticle}}" class="post-title mb-2">{{Title}} {{#if IsPremium}}
+                    <span class="badge badge-danger">PREMIUM</span>
+                    {{/if}}</a>
+                  <div class="post-meta d-flex align-items-center mb-2">
+                    <a href="#" class="post-author">{{FullName}}</a>
+                    <i class="fa fa-circle" aria-hidden="true"></i>
+                    <a href="#" class="post-date">{{#format_date_time TimePublish}}{{/format_date_time}}</a>
+                  </div>
+                  <p class="mb-2 abstract">
+                    {{Abstract}}
+                  </p>
+                  <div class="post-meta d-flex">
+                    <a href="/articles/{{IDArticle}}"><i class="fa fa-comments-o" aria-hidden="true"></i>
+                      {{numofCM}}</a>
+                    <a href="/articles/{{IDArticle}}"><i class="fa fa-eye" aria-hidden="true"></i> {{Views}}</a>
+                    <a href="/articles/{{IDArticle}}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{Ranks}}</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+
+          <div id="contentMore">
+
+          </div>
+          <button type="button" class="btn vizew-btn w-100 mt-30" id="loadMore">Read More</button>
+        </div>
+      </div>
+      {{!-- Các views liên quan prenium --}}
+      <div class="col-12 col-md-5 col-lg-4">
+        <div class="sidebar-area">
+
+
+          <div class="single-widget latest-video-widget mb-50">
+            <!-- Section Heading -->
+            <div class="section-heading style-2 mb-30">
+              <h4>Top View</h4>
+              <div class="line"></div>
+            </div>
+            <!-- Single Blog Post -->
+            {{#each listTop10Views}}
+            <div class="single-post-area mb-30">
+              <!-- Post Thumbnail -->
+              <a href="/articles/{{IDArticle}}">
+                <div class="post-thumbnail image_hover">
+                  <img src="../../public/images/{{Avatar}}"  {{#if IsPremium}}  {{#unless ../isUserPremium}}
+                      class="bur"{{/unless}} {{/if}} alt=""
+                    style="height: 215px!important;">
+                  <!-- Video Duration -->
+                  <span class="video-duration">{{#format_date_time TimePublish}}{{/format_date_time}}</span>
+                </div>
+              </a>
+
+              <!-- Post Content -->
+              <div class="post-content">
+                <a href="/categories/{{IDCate}}" class="post-cata cata-sm cata-success">{{CategoryName}}</a>
+                <a href="/subcategories/{{IDSubCategory}}"
+                  class="post-cata cata-sm cata-primary">{{SubCategoryName}}</a>
+                <a href="/articles/{{IDArticle}}" class="post-title">{{Title}} {{#if IsPremium}}
+                  <span class="badge badge-danger">PREMIUM</span>
+
+                  {{/if}}</a>
+                <div class="post-meta d-flex">
+                  <a href="/articles/{{IDArticle}}"><i class="fa fa-comments-o" aria-hidden="true"></i>
+                    {{numofCM}}</a>
+                  <a href="/articles/{{IDArticle}}"><i class="fa fa-eye" aria-hidden="true"></i> {{Views}}</a>
+                  <a href="/articles/{{IDArticle}}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{Ranks}}</a>
+                </div>
+              </div>
+            </div>
+            <hr style="border: 1px solid #4e5152">
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ##### Vizew Psot Area End ##### -->

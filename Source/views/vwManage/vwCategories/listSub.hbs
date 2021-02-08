@@ -1,0 +1,70 @@
+{{#section 'js'}}
+<script>
+    function delete_function(id) {
+      var choice = confirm('Are you sure you delete sub category with ID: ' + id);
+         if (choice) {
+             document.getElementById('myform'+id.toString()).submit();
+          }
+    }
+</script>
+{{/section}}
+
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/categories/listSub">Sub Categories</a></li>
+      <li class="breadcrumb-item active">List</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+          <h2>Sub Categories <b>List </b></h2>
+         
+        </div> 
+        {{#if success}}
+            <div class="alert alert-success" role="alert">
+              {{success}}
+            </div>
+          {{/if}}
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Super Category</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Super Category</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              {{#each listSubCate}}
+              <tr>
+                <td>{{IDSubCategory}}</td>
+                <td>{{SubCategoryName}}</td>
+                <td>{{CategoryName}}</td>
+                <td>
+                  <a href="/manage/categories/editSub?id={{IDSubCategory}}" class="text-warning"><i class="fa fa-edit"></i></a>
+                  <a id="{{IDSubCategory}}"class="text-danger" onclick="delete_function(this.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                </td>
+                <form id = "myform{{IDSubCategory}}" action="/manage/categories/deleteSub?id={{IDSubCategory}}" method="POST">
+                    </form>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

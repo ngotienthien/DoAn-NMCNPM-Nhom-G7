@@ -1,0 +1,274 @@
+<!-- ##### Breadcrumb Area Start ##### -->
+<div class="vizew-breadcrumb">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home</a></li>
+            <li class="breadcrumb-item"><a href="/categories/{{Post.IDCate}}">{{Post.CategoryName}}</a></li>
+            <li class="breadcrumb-item"><a href="/subcategories/{{Post.IDSubCategory}}">{{Post.SubCategoryName}}</a>
+            </li>
+            <li class="breadcrumb-item active" aria-current="page">{{Post.Title}}</li>
+          </ol>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ##### Post Details Area Start ##### -->
+<section class="post-details-area mb-80">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="post-details-thumb mb-50">
+          <img src="../../../public/images/{{Post.BigAvatar}}" alt="">
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <!-- Post Details Content Area -->
+      <div class="col-12 col-lg-8 col-xl-7">
+        <div class="post-details-content">
+          <!-- Blog Content -->
+            <div class="blog-content" id="content">
+
+            <!-- Post Content -->
+            <div class="post-content mt-0">
+              <a href="/categories/{{Post.IDCate}}" class="post-cata cata-sm cata-success">{{Post.CategoryName}}</a>
+              <a href="/subcategories/{{Post.IDSubCategory}}"
+                class="post-cata cata-sm cata-primary">{{Post.SubCategoryName}}</a>
+              <a href="#" class="post-title mb-2">{{Post.Title}}</a>
+              <div class="d-flex justify-content-between mb-30">
+                <div class="post-meta d-flex align-items-center">
+                  <a href="#" class="post-author">By {{Post.FullName}}</a>
+                  <i class="fa fa-circle" aria-hidden="true"></i>
+                  <a href="#" class="post-date">{{#format_date_time Post.TimePublish}}{{/format_date_time}}</a>
+                </div>
+                <div class="post-meta d-flex">
+                  <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {{Post.numofCM}}</a>
+                  <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {{Post.Views}}</a>
+                  <a href="#" id="Like"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> <span id="NumLike">
+                      {{Post.Ranks}}</span></a>
+                </div>
+              </div>
+            </div>
+            {{{Post.Content}}}
+
+            <!-- Post Tags -->
+            <div class="post-tags mt-30">
+              <ul>
+                <h4><i>Tags: &nbsp;</i></h4>
+                {{#each Tags}}
+                <li><a href="/tag/{{IDTag}}">{{TagName}}</a></li>
+                {{/each}}
+              </ul>
+            </div>
+
+            <span id="ArticleID" style="display: none;" class="form-control">{{Post.IDArticle}}</span>
+
+            <!-- Comment Area Start -->
+            <div class="comment_area clearfix mb-50">
+
+              <!-- Section Title -->
+              <div class="section-heading style-2">
+                <h4>Comment</h4>
+                <div class="line"></div>
+              </div>
+
+              <ul id="showcomment">
+                {{#if CommentIsEmpty}}
+                <span id="cmEmpty" class=""><b>Chưa có bình luận nào, hãy bình luận cho bài viết nào!!!</b></span>
+                {{else}}
+                {{#each Comments}}
+                <!-- Single Comment Area -->
+                <li class="single_comment_area">
+                  <!-- Comment Content -->
+                  <div class="comment-content d-flex">
+                    <!-- Comment Author -->
+                    <div class="comment-author">
+                      <img src="../../../public/images/{{avatar}}" alt="author">
+                    </div>
+                    <!-- Comment Meta -->
+                    <div class="comment-meta">
+                      <a href="#" class="comment-date">{{#format_date_time Date}}{{/format_date_time}}</a>
+                      <h6>{{FullName}}</h6>
+                      <p>{{Comment}}</p>
+                    </div>
+                  </div>
+                </li>
+                {{/each}}
+                {{/if}}
+              </ul>
+            </div>
+          </div>
+          <div id="checkLogin">
+
+            <!-- Check login -->
+            {{#unless lcIsAuthenticated}}
+            <span style="font-weight: bold; font-size: 20px;">Bạn cần đăng nhập để bình luận!!!</span>
+            <a style="color: green; text-decoration: underline;" href="/login?retURL={{curURL}}">đăng nhập ngay</a>
+            {{else}}
+            <!-- Post A Comment Area -->
+            <div class="post-a-comment-area">
+              <!-- Section Title -->
+              <div class="section-heading style-2">
+                <h4>Leave a reply</h4>
+                <div class="line"></div>
+              </div>
+              <!-- Reply Form -->
+              <div class="contact-form-area">
+                <form id="frmComment" action="" method="POST">
+                  <div class="row">
+                    <div class="col-12">
+                      <textarea name="message" required class="form-control" id="message"
+                        placeholder="Message*"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <button class="btn vizew-btn mt-30" id="submitComment" type="submit">Submit Comment</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+            {{/unless}}
+          </div>
+        </div>
+      </div>
+      <!-- Sidebar Widget -->
+      <div class="col-12 col-md-5 col-lg-4">
+        <div class="sidebar-area">
+          
+          {{#if IsUserPremium}}
+              <button type="button" class="btn vizew-btn w-100 mt-30 mb-5" id="downloadPDF">Download PDF</button>           
+          {{/if}}
+          <!-- ***** Single Widget ***** -->
+          <div class="single-widget p-0 author-widget mb-4">
+            <div class="p-4">
+              <img class="author-avatar" src="../../../public/images/{{Author.Avatar}}" alt="">
+              <a href="#" class="author-name">{{Author.FullName}}</a>
+              <div class="author-social-info">
+
+                <a href="#"><i class="fa fa-envelope-o"></i></a>
+              </div>
+              <p>{{Author.Email}}</p>
+            </div>
+
+            <div class="authors--meta-data d-flex">
+              <p>Posted<span>{{NumArticlesOfUser}}</span></p>
+              <p>Comments<span>{{NumOfAllCommentWithAuthor}}</span></p>
+            </div>
+          </div>
+          <!-- ***** 5 post same cate ***** -->
+          <div class="single-widget latest-video-widget mb-50">
+            <!-- Section Heading -->
+            <div class="section-heading style-2 mb-30">
+              <h4>Related Post</h4>
+              <div class="line"></div>
+            </div>
+            {{#each RelatePosts}}
+            <!-- Single Blog Post -->
+            <div class="single-post-area mb-30">
+              <!-- Post Thumbnail -->
+              <a href="/articles/{{IDArticle}}">
+                <div class="post-thumbnail image_hover">
+                  <img src="../../../public/images/{{Avatar}}" alt="">
+                  <!-- Video Duration -->
+                  <span class="video-duration">{{#format_date_time TimePublish}}{{/format_date_time}}</span>
+                </div>
+              </a>
+              <!-- Post Content -->
+              <div class="post-content">
+                <a href="/categories/{{IDCate}}" class="post-cata cata-sm cata-success">{{CategoryName}}</a>
+                <a href="/subcategories/{{IDSubCategory}}"
+                  class="post-cata cata-sm cata-primary">{{SubCategoryName}}</a>
+                <a href="/articles/{{IDArticle}}" class="post-title">{{Title}}</a>
+                <div class="post-meta d-flex">
+                  <a href="#"><i class="fa fa-comments-o" aria-hidden="true"></i> {{numofCM}}</a>
+                  <a href="#"><i class="fa fa-eye" aria-hidden="true"></i> {{Views}}</a>
+                  <a href="#"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> {{Ranks}}</a>
+                </div>
+              </div>
+            </div>
+            {{/each}}
+          </div>
+          <!-- ***** 5 post same cate ***** -->
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+<!-- ##### Post Details Area End ##### -->
+{{#section 'js'}}
+<script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/pdfmake.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/pdfmake@latest/build/vfs_fonts.min.js'></script>
+<!-- html-to-pdfmake file: -->
+<script src="https://cdn.jsdelivr.net/npm/html-to-pdfmake/docs/browser.js"></script>
+<script>
+  $(function () {
+    $('#downloadPDF').click(function () {
+      $('.sidebar-area').hide();
+      $('.header-area').hide();
+      $('.vizew-breadcrumb').hide();
+      $('.post-content').hide();
+      $('.comment_area').hide();
+      $('#checkLogin').hide();
+      $('#showcomment').hide();
+      window.print();
+      $('.sidebar-area').show();
+      $('.header-area').show();
+      $('.vizew-breadcrumb').show();
+      $('.post-content').show();
+      $('.comment_area').show();
+      $('#checkLogin').show();
+      $('#showcomment').show();
+
+    });
+  });
+
+  $('#frmComment').on('submit', function (e) {
+    e.preventDefault();
+    var Comment;
+    var dataToSend = {comment: $("#message").val(), idPost: $("#ArticleID").text()};
+    dataToSend = JSON.stringify({dataToSend});
+    $.ajax({
+      url: "/articles/comment",
+      type: "POST",
+      data: 'info=' + dataToSend,
+      success: function (data) {
+        Comment = data;
+        $("#showcomment").append('<li class="single_comment_area">' +
+          '<div class="comment-content d-flex">' +
+          '<div class="comment-author">' +
+          '<img src="../../../public/images/' + Comment.Avatar + '"' + 'alt="author" >' +
+          '</div>' +
+          '<div class="comment-meta">' +
+          '<a href="#" class="comment-date">' + Comment.CmDate + '</a>' +
+          '<h6>' + Comment.FullName + '</h6>' +
+          '<p>' + Comment.Comment + '</p>' +
+          '</div></div></li>');
+        $('#message').val("");
+        $("#cmEmpty").text("");
+      }
+    });
+  });
+
+  $('#Like').click(function () {
+    var idPost = $("#ArticleID").text();
+    $.ajax({
+      url: "/articles/uptoRank",
+      type: "POST",
+      data: 'idPost=' + idPost,
+      success: function (data) {
+        console.log(data);
+        $('#NumLike').text(data.Ranks);
+      }
+    });
+  });
+</script>
+{{/section}}

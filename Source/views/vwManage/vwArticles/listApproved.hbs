@@ -1,0 +1,78 @@
+
+{{#section 'js'}}
+<script>
+   $(document).ready(function ()
+      { $(".class-span").each(function(i){
+           var len=$(this).text().trim().length;
+           if(len>100)
+           {
+               $(this).text($(this).text().substr(0,100)+'...');
+           }
+       });
+    });
+    function delete_function(id) {
+      var choice = confirm('Are you sure you delete article with ID: ' + id);
+         if (choice) {
+             document.getElementById('myform'+id.toString()).submit();
+          }
+    }
+</script>
+{{/section}}
+<main>
+  <div class="container-fluid">
+    <ol class="breadcrumb mb-4 mt-3">
+      <li class="breadcrumb-item"><a href="/manage">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/manage/articles/listapproved">Article</a></li>
+      <li class="breadcrumb-item active">List Approved</li>
+    </ol>
+    <div class="card mb-4">
+      <div class="card-header">
+        <div class="row ">
+            <h2>Articles <b>List Approved</b></h2>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Abstract</th>
+                <th>Author</th>
+                <th>Time Publish</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Abstract</th>
+                <th>Author</th>
+                <th>Time Publish</th>
+                <th>Action</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              {{#each ListApproved}}
+                <tr>
+                  <td>{{IDArticle}}</td>
+                  <td>{{Title}}</td>
+                  <td class="class-span">{{Abstract}}</td>
+                  <td><p class="badge badge-success">{{NickName}}</p></td>
+                  <td>{{#format_date_time TimePublish}}{{/format_date_time}}</td>
+                  <td>
+                    <a href="/manage/articles/details?id={{IDArticle}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                    <a href="" class="text-danger" onclick="delete_function(this.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                  </td>
+                  <form id = "myform{{IDArticle}}" action="/manage/articles/delete?id={{IDArticle}}" method="POST"></form>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

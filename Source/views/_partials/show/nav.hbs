@@ -1,0 +1,46 @@
+<div class="vizew-main-menu" id="sticker">
+  <div class="classy-nav-container breakpoint-off">
+    <div class="container">
+
+      <!-- Menu -->
+      <nav class="classy-navbar justify-content-between" id="vizewNav">
+
+        <!-- Nav brand -->
+        <a href="/" class="nav-brand"><img src="../../../assets/show/core-img/logo.png" alt=""></a>
+
+        <!-- Navbar Toggler -->
+        <div class="classy-navbar-toggler">
+          <span class="navbarToggler"><span></span><span></span><span></span></span>
+        </div>
+
+        <div class="classy-menu">
+
+          <!-- Close Button -->
+          <div class="classycloseIcon">
+            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+          </div>
+
+          <!-- Nav Start -->
+          <div class="classynav">
+            <ul>
+              {{#each lcCategories}}
+              <li><a href="/categories/{{IDCategory}}" style="content = ' '">{{CategoryName}}</a>
+                <ul class="dropdown">
+                  {{#each ../lcSubCategories}}
+                    {{#compare_id IDCategory ../IDCategory}}
+                      <li><a href="/subcategories/{{IDSubCategory}}">{{SubCategoryName}}</a></li>
+                    {{/compare_id}}
+                  {{/each}}
+                </ul>
+              </li>
+              {{/each}}
+            </ul>
+            </li>
+            </ul>
+          </div>
+          <!-- Nav End -->
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
