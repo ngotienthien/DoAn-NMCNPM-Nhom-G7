@@ -1,0 +1,140 @@
+@mixin responsive($breakpoint) {
+    
+    @if $breakpoint == bigtablet {
+        @media (min-width: 740px) and (max-width: 1112px){@content};
+    }
+    @else if $breakpoint == mediumpc{
+        @media (min-width: 1113px){@content};
+    }
+
+    // container
+    @else if $breakpoint == tabletpc{
+        @media (min-width: 740px) and (max-width: 1023px){@content};
+    }
+    @else if $breakpoint == pc{
+        @media (min-width: 1024px) and (max-width: 1239px){@content};
+    }
+}
+
+@mixin rightleft($prop, $value) {
+    #{$prop}-left: $value;
+    #{$prop}-right: $value;
+}
+
+@mixin colwidth($value){
+    flex-basis: $value;
+    max-width: $value;
+}
+
+.grid {
+    display: block;
+    width: 100%;
+    padding: 0;
+
+    .row{
+        display: flex;
+        flex-wrap: wrap;
+
+        @include rightleft(margin, -4px);
+        
+        @include responsive (bigtablet){
+            @include rightleft(margin, -8px);
+        }
+        @include responsive (mediumpc){
+            @include rightleft(margin, -12px);
+        }
+
+        .col{
+            box-sizing: border-box;
+            @include rightleft(padding, 4px);
+
+            @include responsive (bigtablet){
+                @include rightleft(padding, 8px);
+            }
+            @include responsive (mediumpc){
+                @include rightleft(padding, 12px);
+            }
+        }
+        $lenght: 12;
+        .l-0,
+        .m-0,
+        .s-0{
+            display: none;
+        }
+
+        @for $num from 1 through $lenght{
+            .s-#{$num}{
+                $cal: 100% / 12 * $num;
+                @include colwidth($cal);
+            }
+            .s-o-#{$num}{
+                margin-left: 100% / 12 * $num;
+            }
+        }
+
+        @for $num from 1 through $lenght{
+            @include responsive (bigtablet){
+                .m-#{$num}{
+                    $cal: 100% / 12 * $num;
+                    @include colwidth($cal);
+                }
+                .m-o-#{$num}{
+                    margin-left: 100% / 12 * $num;
+                }
+            }
+        }
+        
+        @for $num from 1 through $lenght{
+            @include responsive (mediumpc){
+                .l-#{$num}{
+                    $cal: 100% / 12 * $num;
+                    @include colwidth($cal);
+                }
+                .l-o-#{$num}{
+                    margin-left: 100% / 12 * $num;
+                }
+            }
+        }
+    }
+
+    &.wide{
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+
+        @include responsive(tabletpc){
+            width: 644px;
+        }
+        @include responsive(pc){
+            width: 984px;
+        }
+        .row{
+            @include responsive (pc){
+                @include rightleft(margin, -12px);
+            }
+
+            .col{
+                @include responsive (pc){
+                    @include rightleft(padding, 12px);
+                }
+            }
+
+            .l-0{
+                display: none;
+            }
+
+            $lenght: 12;
+            @for $num from 1 through $lenght{
+                @include responsive (mediumpc){
+                    .l-#{$num}{
+                        $cal: 100% / 12 * $num;
+                        @include colwidth($cal);
+                    }
+                    .l-o-#{$num}{
+                        margin-left: 100% / 12 * $num;
+                    }
+                }
+            }
+        }
+    }
+}

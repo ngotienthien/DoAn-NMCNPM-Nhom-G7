@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,QAAQ,CAAA;EACJ,OAAO,EAAE,KAAK;EACd,KAAK,EAAE,KAAK;EACZ,gBAAgB,EAAE,kBAAiB;EACnC,MAAM,EAAE,KAAK;EAEb,QAAQ,EAAE,KAAK;EACf,KAAK,EAAE,CAAC;EACR,GAAG,EAAE,CAAC;EACN,UAAU,ECJG,IAAI;EDMjB,OAAO,EAAE,CAAC;EACV,OAAO,EAAE,IAAI;CAChB",
+    "sources": [
+        "overlay.scss",
+        "../abstracts/variable.scss"
+    ],
+    "names": [],
+    "file": "overlay.css"
+}

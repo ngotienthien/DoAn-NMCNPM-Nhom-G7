@@ -1,0 +1,19 @@
+.title {
+  width: 100%;
+  font-family: inherit;
+  text-align: center;
+}
+
+.title__heading {
+  font-size: 25px;
+  font-weight: 500;
+  margin-top: 56px;
+}
+
+.title__caption {
+  font-size: 16px;
+  letter-spacing: 2px;
+  padding: 24px 0;
+  display: inline-block;
+}
+/*# sourceMappingURL=title.css.map */
