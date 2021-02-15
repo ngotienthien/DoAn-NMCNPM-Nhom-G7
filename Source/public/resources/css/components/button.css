@@ -1,4 +1,20 @@
-.btn {
+.btn-left-center {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.btn-right-center {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.btn-center-center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -14,28 +30,36 @@
   text-align: center;
 }
 
-.btn-login {
+.btn-primary {
   text-decoration: none;
   color: #f3f3f3;
   font-size: inherit;
-  background-color: #ffaf42;
+  background-color: #fe6e00;
 }
 
-.btn-account {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
+.btn-white {
+  text-decoration: none;
+  color: #222222;
+  font-size: inherit;
+  background-color: #f3f3f3;
 }
 
-.btn-account img {
-  border-radius: 50%;
+.btn-radius-20 {
+  border-radius: 20px;
 }
 
-.btn-account:hover .account,
-.btn-account:active .account {
-  display: block;
-  opacity: 1;
+.btn-google {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #fe6e00;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
+  width: 300px;
+  padding: 8px 12px;
 }
 /*# sourceMappingURL=button.css.map */

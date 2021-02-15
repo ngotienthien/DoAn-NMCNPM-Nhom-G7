@@ -1,0 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap");
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+html {
+  font-size: 15px;
+}
+
+body {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.btn-left-center {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.btn-right-center {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+}
+
+.btn-center-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.login-input__paragraph, .login-input-with__tips {
+  letter-spacing: 2px;
+  margin: 24px 0 24px 0;
+  font-weight: 200;
+  font-size: 13px;
+  color: #333;
+  font-family: cursive;
+}
+
+.form-group__input {
+  display: block;
+  padding: 3px 12px;
+  border: 1px solid #fe6e00;
+  outline: none;
+  max-width: 100%;
+  width: 400px;
+  height: 50px;
+  font-size: 22px;
+  font-family: cursive;
+}
+
+.login-input-btn input,
+.login-input-btn a {
+  display: block;
+  padding: 12px;
+  border: 1px solid #fe6e00;
+  outline: none;
+  width: 200px;
+}
+
+.login-input-with__google:active, .login-input-btn input:active,
+.login-input-btn a:active {
+  -webkit-transform: rotate(10deg);
+          transform: rotate(10deg);
+  opacity: 0;
+}
+
+.login-input-btn input:hover, .login-input-btn input:focus,
+.login-input-btn a:hover,
+.login-input-btn a:focus {
+  -webkit-box-shadow: 0 0 10px #333;
+          box-shadow: 0 0 10px #333;
+}
+
+.btn {
+  display: inline-block;
+  border-radius: 5px;
+  padding: 6px 0px;
+  min-width: 100px;
+  text-align: center;
+}
+
+.btn-primary {
+  text-decoration: none;
+  color: #f3f3f3;
+  font-size: inherit;
+  background-color: #fe6e00;
+}
+
+.btn-white {
+  text-decoration: none;
+  color: #222222;
+  font-size: inherit;
+  background-color: #f3f3f3;
+}
+
+.btn-radius-20 {
+  border-radius: 20px;
+}
+
+.btn-google, .login-input-with__google {
+  color: #000;
+  background-color: #fff;
+  border: 1px solid #fe6e00;
+  border-radius: 8px;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 100%;
+  width: 300px;
+  padding: 8px 12px;
+}
+
+.margin-left-24 {
+  margin-left: 24px !important;
+}
+
+.margin-t-b-8 {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.login {
+  padding-top: 24px;
+  height: 100vh;
+  -webkit-box-shadow: -2rem 0 4rem rgba(68, 68, 68, 0.2);
+          box-shadow: -2rem 0 4rem rgba(68, 68, 68, 0.2);
+}
+
+.login-bg {
+  height: 100%;
+  background-image: url("../../img/bg-signin.jpg");
+  background-size: 130%;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.login-input {
+  height: 100%;
+  -webkit-box-shadow: -7rem 0 10rem #ccc;
+          box-shadow: -7rem 0 10rem #ccc;
+  width: 8rem;
+}
+
+.login-input__logo {
+  text-align: center;
+}
+
+.login-input__logo--link {
+  width: 120px;
+  height: 120px;
+  display: inline-block;
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.login-input__logo--link img {
+  width: 100%;
+}
+
+.login-input__logo--link:active {
+  -webkit-transform: scale(0.9);
+          transform: scale(0.9);
+  -webkit-filter: blur(1px);
+          filter: blur(1px);
+}
+
+.login-input__logo--link:focus {
+  outline: none;
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.login-input__heading {
+  margin-top: 24px;
+  font-size: 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.login-input-with {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login-input-with__google {
+  max-width: 100%;
+  width: 300px;
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.login-input-with__google:hover, .login-input-with__google:focus {
+  background-color: #fe6e00;
+}
+
+.login-input-with__google i {
+  color: red;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+.login-input-with__tips {
+  display: block;
+}
+
+.login-input--solid {
+  max-width: 100%;
+  width: 120px;
+  border: 1px solid #fe6e00;
+  margin: 24px 0;
+  -webkit-box-shadow: 0 3px 5px #333;
+          box-shadow: 0 3px 5px #333;
+}
+
+.login-input-btn {
+  width: 500px;
+  height: 56px;
+  position: relative;
+}
+
+.login-input-btn input,
+.login-input-btn a {
+  -webkit-transition: all .2s ease;
+  transition: all .2s ease;
+}
+
+.login-input-link__forgot, .login-input-link__account {
+  display: block;
+  padding: 5px 8px;
+  text-align: left;
+  font-size: 18px;
+}
+
+.login-input-link__forgot:focus, .login-input-link__account:focus {
+  outline: none;
+  color: #fe6e00;
+  font-size: 20px;
+  text-shadow: 0 0 10px #fe6e00;
+}
+
+.form-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.form-group__input:focus {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+}
+
+.form-group__check {
+  margin: 8px 0;
+}
+
+.form-group .control-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  font-size: 22px;
+  font-family: cursive;
+}
+
+.form-group .control-group .gender {
+  width: 220px;
+}
+
+.form-group .control-group .gender input {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+  -webkit-transition: all .2s;
+  transition: all .2s;
+}
+
+.form-group .control-group .gender input:focus {
+  outline: none;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
+}
+
+.form-group .control-group .gender input:focus + label {
+  color: #fe6e00;
+}
+
+.form-group .control-group .gender label {
+  cursor: pointer;
+}
+/*# sourceMappingURL=login.css.map */
