@@ -1,0 +1,127 @@
+.login{
+    padding-top: 24px;    
+    height: 100vh;
+    box-shadow: -2rem 0 4rem rgba(68, 68, 68, 0.2);
+    &-bg{
+        height: 100%;
+        background-image: url('../../img/bg-signin.jpg');
+        background-size: 130%;
+        background-repeat: no-repeat;
+        background-position: center center;
+    }
+    &-input{
+        height: 100%;
+        box-shadow: -7rem 0 10rem #ccc;
+        width: 8rem;
+
+        &__logo{
+            text-align: center;
+            
+            &--link{
+                width: 120px;
+                height: 120px;
+                display: inline-block;
+                transition: all .2s;
+                img{
+                    width: 100%;
+                }
+
+                &:active{
+                    transform: scale(.9);
+                    filter: blur(1px);
+                }
+                &:focus{
+                    outline: none;
+                    transform: scale(1.2);
+                }
+            }
+        }
+
+        &__heading{
+            margin-top: 24px;
+            font-size: 22px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        &__paragraph{
+            @extend %paragraph-sub;
+        }
+
+        &-with{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            &__google{
+                max-width: 100%;
+                width: 300px;
+                @extend .btn-google;
+                transition: all .2s ease;
+                
+                &:hover,
+                &:focus{
+                    background-color: $color-primary;
+                }
+
+                i{
+                    color: red;
+                    font-size: 20px;
+                    vertical-align: middle;
+                }
+
+                &:active{
+                    @extend %btn-login--active;
+                }
+            }
+
+            &__tips{
+                display: block;
+                @extend %paragraph-sub;
+            }
+        }
+
+        &--solid{
+            max-width: 100%;
+            width: 120px;
+            border: 1px solid $color-primary;
+
+            margin: 8px 0;
+            box-shadow: 0 3px 5px #333;
+        }
+
+        &-btn{
+            width: 500px;
+            height: 56px;
+            
+            position: relative;
+        
+            input,
+            a{
+                @extend %btn-login;
+                transition: all .2s ease;
+                &:hover,
+                &:focus{
+                    @extend %btn-login--hoverfocus;
+                }
+                &:active{
+                    @extend %btn-login--active;
+                }
+            }
+        }
+        &-link__forgot,
+        &-link__account{
+            display: block;
+            padding: 5px 8px;
+            text-align: left;
+            font-size: 18px;
+
+            &:focus,
+            &:hover{
+                outline: none;
+                color: $color-primary;
+                font-size: 20px;
+                text-shadow: 0 0 10px $color-primary;
+            }
+        }
+    }
+}

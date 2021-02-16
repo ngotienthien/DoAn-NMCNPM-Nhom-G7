@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="stylesheet" href="../../public/resources/css/libraries/grid.css">
+    <link rel="stylesheet" href="../../public/resources/css/all/styles.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
+</head>
+<body>
+    <div class="grid wide">
+        <div class="row login">
+            <div class="col l-6 login-bg"></div>
+            <div class="col l-6 login-input">
+                <div class="login-input__logo">
+                    <a href="/" class="login-input__logo--link">
+                        <img src="./../../public/resources/favicons/android-chrome-144x144.png" alt="">
+                    </a>
+                </div>
+                    <div class="margin-left-24">
+                        <h1 class="login-input__heading">Đăng nhập</h1>
+                        <p class="login-input__paragraph">Tham gia ngay cộng đồng du lịch Việt Nam để cùng nhau xây dựng và chia sẻ những thông tin bổ ích đến với mọi người!</p>
+                    <div class="login-input-with">
+                        <a href="#" class="login-input-with__google">Đăng nhập với <i class="fab fa-google-plus-g"></i></a>
+                        <span class="login-input-with__tips">
+                            Mẹo: Đăng nhập nhanh hơn với Google!
+                        </span>
+                    </div>
+                    <hr class="login-input--solid">
+                    <form class="form-group" action="">
+                        <input type="text" placeholder="Tên đăng nhập" class="form-group__input margin-t-b-8 btn-radius-20" required>
+                        <input type="password" placeholder="Mật khẩu" class="form-group__input margin-t-b-8 btn-radius-20" required>
+                        <div class="form-group__check margin-t-b-8">
+                            <input type="checkbox" id="remember">
+                            <label for="remember">Nhớ mật khẩu</label>
+                        </div>
+                        <div class="login-input-btn margin-t-b-8">
+                            <input type="submit" value="Đăng nhập" class="btn btn-left-center btn-primary btn-radius-20"
+                            id="btn-submit">
+                            <a href="./register" class="btn btn-right-center btn-white btn-radius-20">Đăng ký</a>
+                        </div>
+                        <a href="#" class="login-input-link__forgot margin-t-b-8">Quên mật khẩu</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./../../public/resources/js/keyup-enter.js"></script>
+</body>
+</html>

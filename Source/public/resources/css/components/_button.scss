@@ -1,0 +1,48 @@
+.btn{    
+    display: inline-block;
+    border-radius: 5px;
+    padding: 6px 0px;
+    min-width: 100px;
+    text-align: center;
+}
+
+.btn-left-center{
+    @extend %block-left-center;
+}
+.btn-right-center{
+    @extend %block-right-center;
+}
+.btn-center-center{
+    @extend %block-center-center;
+}
+
+.btn-primary{
+    @include fontcolor(inherit, $color-light);
+    background-color: $color-primary;
+}
+
+.btn-white{
+    @include fontcolor(inherit, $color-dark);
+    background-color: $color-light;
+}
+
+.btn-radius-20{
+    border-radius: 20px;    
+}
+
+.btn-google{
+    color: #000;
+    background-color: #fff;
+    border: 1px solid $color-primary;
+    border-radius: 8px;
+
+    text-decoration: none;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+
+    max-width: 100%;
+    width: 300px;
+    padding: 8px 12px;
+}

@@ -1,0 +1,118 @@
+.slider{
+    position: relative;
+    height: 100vh;
+
+    @include backgroundfull__linear(
+        url('../../../resources/img/slider/slider_001.jpg') 
+    );
+
+    z-index: 1;
+
+    &-box{ 
+        @extend %block-center-center;
+        width: 100%;
+
+        &__upload{
+            a{
+                display: inline-block;
+                border-radius: 15px 15px 0px 0px;
+                width: 100%;
+                line-height: $height-primary;
+                
+                text-align: center;
+                text-transform: uppercase;
+                @include fontcolor(20px, $color-light);
+
+                background-color: $color-primary;
+
+                transition: all .2s;
+            }
+            a:hover,
+            a:active{
+                background-color: $color-primary-light;
+            }
+        }
+        
+
+
+        &__search{
+            margin-top: 4px;
+            min-height: 00px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background-color: $color-light;
+
+            &--input{
+                width: 70%;
+                padding: 3px 12px;
+                background-color: rgba(233, 109, 7, 0.5);
+                border: none;
+                height: 28px;
+                border-radius: 15px 0 0 15px;
+                letter-spacing: 1px;
+
+            }
+            &--input:focus{
+                outline: none;
+            }
+
+            &--btn{
+                width: 29%;
+                padding: 3px 12px;
+                background-color: $color-primary;
+                color: $color-light;
+                border: none;
+                height: 28px;
+                border-radius: 0 15px 15px 0;
+            }
+            &--btn:focus{
+                outline: none;
+            }
+        }
+
+        &__heading{
+            margin: 12px 0;
+
+            font-size: 20px;
+            font-weight: 500;
+            text-transform: uppercase;
+            text-align: center;
+
+            color: $color-primary;
+        }
+        
+
+        &__form{
+            width: 100%;
+            padding: 12px 10px;
+        }
+    }
+    &__next{
+        @include slider-pagination(left);
+
+        &-icon{
+            @extend %align-center;
+            left: 10px; 
+            @extend %icon-circle;
+        }
+
+    }
+    &__previous{
+        @include slider-pagination(right);
+
+        &-icon{
+            @extend %align-center;
+            right: 10px;
+            @extend %icon-circle;
+        }
+    }
+
+    &__next:hover,
+    &__next:active,
+    &__previous:hover,    
+    &__previous:active{    
+        background-color: rgba(44, 44, 44, 0.3);
+    }
+}
