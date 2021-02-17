@@ -2,7 +2,7 @@
     position: relative;
     height: 100vh;
 
-    @include backgroundfull__linear(
+    @include backgroundfull__linear(none,
         url('../../../resources/img/slider/slider_001.jpg') 
     );
 

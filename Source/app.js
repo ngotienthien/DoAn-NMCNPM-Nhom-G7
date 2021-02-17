@@ -47,6 +47,9 @@ app.get('/login', function (req, res) {
 app.get('/register', function (req, res) {
   res.render('html/register')
 })
+app.get('/account', function (req, res) {
+  res.render('html/account')
+})
  
 
 // app.use("/", require("./routes/show.route"));

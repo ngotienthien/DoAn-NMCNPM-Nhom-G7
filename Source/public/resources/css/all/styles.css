@@ -31,7 +31,7 @@ body {
   right: 0;
   transform: translateY(-50%); }
 
-.btn-center-center, .slider-box, .theme-item__link--icon {
+.btn-center-center, .slider-box, .theme-item__link--icon, .account .scene-avt {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -88,6 +88,25 @@ body {
 .login-input-btn a:hover,
 .login-input-btn a:focus {
   box-shadow: 0 0 10px #333; }
+
+.header-right .btn:focus, .account .option-settings__title {
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2); }
+
+.account .option-settings__title {
+  padding: 12px 15px; }
+
+.account .option-settings-list {
+  display: flex;
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0; }
+
+.account .option-settings__item--link:hover, .account .option-settings__item--link:focus, .account .option-settings__item--link:active, .account .option-settings__item--link.active {
+  box-shadow: 0 0px 15px rgba(0, 0, 0, 0.2);
+  padding-left: 24px;
+  padding-right: 8px;
+  border-radius: 0 24px 24px 0; }
 
 .grid {
   display: block;
@@ -435,7 +454,7 @@ body {
       .form-group .control-group .gender input {
         transform: scale(1.2);
         transition: all .2s; }
-        .form-group .control-group .gender input:focus, .form-group .control-group .gender input:hover {
+        .form-group .control-group .gender input:focus {
           outline: none;
           transform: scale(1.5); }
         .form-group .control-group .gender input:focus + label {
@@ -506,7 +525,11 @@ body {
     display: flex;
     width: 100%;
     height: 56px;
-    text-decoration: none; }
+    text-decoration: none;
+    transition: all .8; }
+    .header-logo:focus {
+      outline: none;
+      transform: scale(1.1); }
     .header-logo__name {
       line-height: 56px;
       text-transform: uppercase;
@@ -528,10 +551,18 @@ body {
       text-decoration: none;
       color: blue;
       font-size: 18px; }
+      .header-nav__link:focus {
+        outline: none;
+        font-size: 22px;
+        font-weight: bolder; }
   .header-right {
     position: relative;
     width: 100%;
     height: 56px; }
+    .header-right .btn:focus {
+      letter-spacing: 2px;
+      outline: none;
+      background-color: #ffaf42; }
     .header-right .account__btn {
       display: block;
       position: absolute;
@@ -575,7 +606,7 @@ body {
 .slider {
   position: relative;
   height: 100vh;
-  background-image: linear-gradient(to top, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.2)), url("../../../resources/img/slider/slider_001.jpg");
+  background-image: none, url("../../../resources/img/slider/slider_001.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -832,3 +863,99 @@ body {
         color: #fe6e00;
         font-size: 20px;
         text-shadow: 0 0 10px #fe6e00; }
+
+.account {
+  margin-top: 56px; }
+  .account .scene {
+    position: relative;
+    display: block;
+    height: 300px;
+    width: 100%;
+    background-image: linear-gradient(to right bottom, #ffaf42, #fd5602), none;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center; }
+    .account .scene-avt {
+      text-align: center; }
+      .account .scene-avt__img {
+        padding: 10px;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%; }
+      .account .scene-avt__name {
+        text-transform: uppercase;
+        font-family: 'Source Sans Pro', sans-serif; }
+    .account .scene-nav {
+      position: absolute;
+      bottom: 11px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      list-style-type: none; }
+      .account .scene-nav__item {
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.3); }
+        .account .scene-nav__item--link {
+          padding: 12px 24px 12px 24px;
+          background-color: #f3f3f3;
+          width: 100%;
+          height: 100%;
+          transition: all .3s linear;
+          text-decoration: none;
+          color: #222222;
+          font-size: 18px;
+          transition: all .3s linear; }
+          .account .scene-nav__item--link:hover, .account .scene-nav__item--link:focus, .account .scene-nav__item--link:active {
+            background-color: #fe6e00;
+            color: #f3f3f3;
+            transform: scale(1.02);
+            letter-spacing: 2px;
+            outline: none; }
+        .account .scene-nav__item--link.active {
+          background-color: #222222;
+          color: #fe6e00; }
+  .account .option-heading {
+    margin: 12px 0px;
+    width: 100%;
+    background-color: rgba(204, 204, 204, 0.63); }
+    .account .option-heading h3 {
+      padding: 12px 0 12px 15px;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700; }
+  .account .option-settings {
+    width: 100%;
+    background-color: rgba(204, 204, 204, 0.63); }
+    .account .option-settings__title {
+      border-bottom: 1px solid #fe6e00;
+      font-size: 16px;
+      text-transform: uppercase; }
+    .account .option-settings-list {
+      flex-direction: column; }
+    .account .option-settings__item {
+      width: 100%;
+      transition: all .3s linear; }
+      .account .option-settings__item--link {
+        display: inline-block;
+        padding: 12px 0 12px 4px;
+        width: 100%;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        text-decoration: none;
+        color: #fe6e00;
+        font-size: 18px;
+        transition: all .3s linear; }
+        .account .option-settings__item--link:hover, .account .option-settings__item--link:focus, .account .option-settings__item--link:active {
+          transform: scale(1.02);
+          letter-spacing: 2px;
+          outline: none;
+          background-color: #fe6e00;
+          color: #f3f3f3; }
+      .account .option-settings__item--link.active {
+        background-color: #222222;
+        color: #fe6e00; }
+  .account .option-contents {
+    width: 100%;
+    height: 900px;
+    background-color: #fe6e00; }

@@ -1,0 +1,137 @@
+.account{
+    margin-top: $height-primary;
+    
+    .scene{
+        position: relative;
+
+        display: block;
+        height: 300px;
+        width: 100%;
+
+        // background-image: linear-gradient(to right bottom, $color-primary-light, $color-primary-dark);
+        // background-repeat: no-repeat;
+        // background-position: center center;
+        // background-size: cover;
+        @include backgroundfull__linear(
+            linear-gradient(to right bottom, $color-primary-light, $color-primary-dark),
+            none);
+
+        &-avt{
+            @extend %block-center-center;
+            
+            text-align: center;
+            &__img{
+                padding: 10px;
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+            }
+            &__name{
+                text-transform: uppercase;
+                font-family: 'Source Sans Pro', sans-serif;
+            }
+        }
+
+        &-nav{
+            position: absolute;
+            bottom: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            display: flex;
+            list-style-type: none;
+            
+            &__item{
+                box-shadow: 0 0 25px rgba(0, 0, 0, .3);
+                &--link{
+                    padding: 12px 24px 12px 24px;
+                    background-color: $color-light;
+                    width: 100%;
+                    height: 100%;
+                    transition: all .3s linear;
+                    @include fontcolor(18px, $color-dark);            transition: all .3s linear;
+                    
+                    &:hover,
+                    &:focus,
+                    &:active{
+                        background-color: $color-primary;
+                        color: $color-light;
+
+                        transform: scale(1.02);
+                        letter-spacing: 2px;
+                        outline: none;
+                    }
+                }
+                &--link.active{
+                    background-color: $color-dark;
+                    color: $color-primary;
+                }
+            }
+        }
+    }
+    .option-heading{
+        margin: 12px 0px;
+        width: 100%;
+        background-color: rgba(204, 204, 204, 0.63);
+
+        h3{
+            padding: 12px 0 12px 15px;
+            font-size: 18px;
+            text-transform: uppercase;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 700;
+        }
+    }
+    .option-settings{
+        width: 100%;
+        
+        background-color: rgba(204, 204, 204, 0.63);
+        &__title{
+            @extend %padding-primary;
+            border-bottom: 1px solid $color-primary;
+            font-size: 16px;
+            text-transform: uppercase;
+            @extend %btn-box-shadow;
+        }
+        &-list{
+            @extend %list-flex-center;
+            flex-direction: column;
+        }
+        &__item{
+            width: 100%;
+            transition: all .3s linear;
+            &--link{
+                display: inline-block;
+                padding: 12px 0 12px 4px;
+                width: 100%;
+                
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                overflow: hidden;
+
+                @include fontcolor(18px, $color-primary);
+                transition: all .3s linear;
+
+                &:hover,
+                &:focus,
+                &:active{
+                    transform: scale(1.02);
+                    letter-spacing: 2px;
+                    outline: none;
+                    @include btn-color($color-primary, $color-light);
+                    @extend %btn-radius-right;
+                }
+            }
+            &--link.active{
+                @include btn-color($color-dark, $color-primary);
+                @extend %btn-radius-right;
+            }
+        }
+    }
+
+    .option-contents{
+        width: 100%;
+        height: 900px;
+        background-color: $color-primary;
+    }
+}

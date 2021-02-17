@@ -24,8 +24,7 @@
             input{
                 transform: scale(1.2);
                 transition: all .2s;
-                &:focus,
-                &:hover{
+                &:focus{
                     outline: none;
                     transform: scale(1.5);    
                 }

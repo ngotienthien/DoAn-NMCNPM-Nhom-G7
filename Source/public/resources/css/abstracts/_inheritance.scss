@@ -78,6 +78,34 @@
     box-shadow: 0 0 10px #333;
 }
 
+%btn-box-shadow{
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .2);
+}
+
+%padding-primary{
+    padding: 12px 15px;
+}
+
+%list-flex-center{
+    display: flex;
+    list-style-type: none;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+}
+
+%btn-radius-right{
+    box-shadow: 0 0px 15px rgba(0, 0, 0, .2);
+    padding-left: 24px;
+    padding-right: 8px;
+    border-radius: 0 24px 24px 0;
+}
+
+@mixin btn-color($bg, $color){
+    background-color: $bg;
+    color: $color;
+}
+
 @mixin fontcolor($font, $color){
     text-decoration: none;
     color: $color;
@@ -100,10 +128,8 @@
     }
 }
 
-@mixin backgroundfull__linear($url){
-    background-image: linear-gradient(to top, 
-    rgba(#fff, .2), rgba(rgb(0, 0, 0), 0.2)),
-    $url;
+@mixin backgroundfull__linear($linear, $url){
+    background-image: $linear, $url;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
