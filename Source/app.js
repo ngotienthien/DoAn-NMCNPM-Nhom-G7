@@ -50,6 +50,9 @@ app.get('/register', function (req, res) {
 app.get('/account', function (req, res) {
   res.render('html/account')
 })
+app.get('/admin', function (req, res) {
+  res.render('html/admin')
+})
  
 
 // app.use("/", require("./routes/show.route"));

@@ -1,0 +1,64 @@
+.admin-header{
+    height: 90px;
+    @extend %btn-box-shadow;
+
+    &-logo{
+        display: block;
+        width: 100%;
+        height: 90px;
+        outline: none;
+        position: relative;
+        // @include backgroundfull__linear(linear-gradient(to right bottom, rgba($color-primary-light, .2), rgba($color-primary-dark, .2)), none);
+        img{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 70px;
+            height: 70px;
+            overflow: hidden;
+            transform: translate(-50%, -50%) rotate(0deg);
+            transition: transform .6s;
+        }
+        &:focus img,
+        &:hover img{
+            transform: translate(-50%, -50%) rotate(360deg);
+        }
+    }
+
+    &-nav{
+        @extend %list-flex-center;
+        flex-direction: row;
+        justify-content: flex-start;
+        min-height: 90px;
+        padding: 0;
+        &__item{
+            width: 100px;
+            height: 90px;
+            flex-basis: 20%;
+            max-width: 20%;
+            background-color: $color-primary-dark;
+            a{
+                display: block;
+                line-height: 90px;
+                text-align: center;
+                text-transform: uppercase;
+                transition: all .3s;
+                transform: rotate(0);
+                @include fontcolor(18px, $color-light);
+                &:hover{
+                    @include btn-color($color-primary-light, $color-light);
+                    letter-spacing: 2px;
+                }
+                &:focus{
+                    @include btn-color($color-light, $color-primary);
+                    letter-spacing: 2px;
+                    transform: rotate(360deg);
+                    outline: none;
+                }
+            }
+        }
+    }
+    .header-right{
+        height: 90px;
+    }
+}

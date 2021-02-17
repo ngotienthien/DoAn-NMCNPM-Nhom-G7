@@ -105,9 +105,7 @@
                 padding: 12px 0 12px 4px;
                 width: 100%;
                 
-                text-overflow: ellipsis;
-                white-space: nowrap;
-                overflow: hidden;
+                @extend %text-ellipsis;
 
                 @include fontcolor(18px, $color-primary);
                 transition: all .3s linear;

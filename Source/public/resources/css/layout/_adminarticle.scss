@@ -1,0 +1,38 @@
+.admin-option{
+    margin-top: 36px;
+    width: 100%;
+    
+}
+
+.admin-article{
+    width: 100%;
+    @extend %btn-box-shadow;
+    @extend %list-flex-center;
+    flex-direction: column;
+
+    &__item{
+        width: 100%;
+        &--link{
+            @extend %padding-primary;
+            display: block;
+            width: 100%;
+            text-align: center;
+            background-color: $color-light;
+            @extend %text-ellipsis;
+            @include fontcolor(16px, $color-primary);
+
+            transition: all .3s ease;
+
+            &:hover{
+                @include btn-color(rgba($color-dark, .2), $color-light);
+            }
+
+            &:focus{
+                outline: none;
+                @extend %btn-radius-right;
+                @include btn-color($color-primary, $color-light);
+                letter-spacing: 2px;
+            }
+        }
+    }
+}
