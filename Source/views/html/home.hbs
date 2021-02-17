@@ -7,10 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VN Tourism | Trang chủ</title>
     <link rel="stylesheet" href="../../public/resources/css/libraries/grid.css">
-    <link rel="stylesheet" href="../../public/resources/css/page/home.css">
+    <link rel="stylesheet" href="../../public/resources/css/all/styles.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css" integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
 </head>
 <body>
+    <!-- Begin Header -->
     <div class="row header">
         <div class="grid wide">
             <div class="row">
@@ -32,14 +33,14 @@
                 </div>
 
                 <!-- Chưa đăng nhập -->
-                <!-- <div class="col l-2">
+                <div class="col l-2">
                     <div class="header-right">
-                        <a href="#" class="btn btn-login">Đăng nhập</a>
+                        <a href="./login" class="btn btn-center-center btn-primary">Đăng nhập</a>
                     </div>
-                </div> -->
+                </div>
 
                 <!-- Đã đăng nhập -->
-                <div class="col l-2">
+                <!-- <div class="col l-2">
                     <div class="header-right">
                         <div class="account">
                             <input type="checkbox" id="account--checked" class="account--checked">
@@ -58,10 +59,14 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
+    <!-- End Header -->
+
+
+    <!-- Begin Slider -->
     <div class="grid slider">
         <div class="row">
             <div class="col l-4 slider-box">
@@ -88,7 +93,9 @@
             <i class="slider__previous-icon fa fa-chevron-right" aria-hidden="true"></i>
         </div>
     </div>
+    <!-- End Slider -->
 
+    <!-- Begin Theme -->
     <section class="grid wide section-container theme">
         <div class="row">
             <div class="col l-3">
@@ -153,7 +160,9 @@
             </div>
         </div>
     </section>
+    <!-- End Theme -->
 
+    <!-- Begin Content -->
     <section class="grid wide section-container content">
         <div class="row">
             <div class="title">
@@ -161,11 +170,13 @@
                 <span class="title__caption">Những bài viết - khoảnh khắc độc đáo</span>
             </div>
         </div>
+        <!-- Begin Section Blog -->
         <div class="content-title">
             <h3 class="content-title__heading">Blog thành viên</h3>
         </div>
         <div class="blog">
             <div class="row">
+                <!-- 2 Item Big -->
                 <div class="row blog-item--big">
                     <div class="col l-6">
                         <a href="#" class="blog-item">
@@ -204,6 +215,7 @@
                         </a>
                     </div>
                 </div>
+                <!-- 8 Item Small -->
                 <div class="col l-3">
                     <a href="#" class="blog-item">
                         <div class="blog-item__img">
@@ -350,7 +362,9 @@
                 </div>
             </div>
         </div>
+        <!-- End Section Blog -->
     </section>
+    <!-- End Content -->
 </body>
 
 </html>

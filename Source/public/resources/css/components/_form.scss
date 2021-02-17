@@ -1,0 +1,40 @@
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    
+    &__input{
+        @extend %form-input;
+        &:focus,
+        &:hover{
+            transform: scale(1.05);
+        }
+    }
+
+    &__check{
+        margin: 8px 0;
+    }
+
+    .control-group{
+        display: flex;
+        font-size: 22px;
+        font-family: cursive;
+        .gender{
+            width: 220px;
+            input{
+                transform: scale(1.2);
+                transition: all .2s;
+                &:focus{
+                    outline: none;
+                    transform: scale(1.5);    
+                }
+                &:focus+label{
+                    color: $color-primary;
+                }
+            }
+            label{
+                cursor: pointer;
+            }
+        }
+    }
+}
