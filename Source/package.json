@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "scss": "node-sass --watch public/resources/css/all/styles.scss -o public/resources/css/all"
+    "scss": "node-sass --watch public/resources/css/all/styles.scss -o public/resources/css/all",
+    "scss-admin": "node-sass --watch public/resources/css/all/admin.scss -o public/resources/css/all"
   },
   "repository": {
     "type": "git",

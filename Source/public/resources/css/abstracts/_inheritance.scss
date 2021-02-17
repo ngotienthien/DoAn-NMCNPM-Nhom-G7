@@ -101,6 +101,12 @@
     border-radius: 0 24px 24px 0;
 }
 
+%text-ellipsis{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 @mixin btn-color($bg, $color){
     background-color: $bg;
     color: $color;
