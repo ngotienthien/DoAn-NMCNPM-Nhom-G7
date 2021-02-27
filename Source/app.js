@@ -18,55 +18,57 @@ app.use(
   })
 );
 app.use("/public", express.static("public"));
-// app.use("/assets", express.static("assets"));
+app.use("/assets", express.static("assets"));
 
-// require("./middlewares/session.mdw")(app);
+require("./middlewares/session.mdw")(app);
 require("./middlewares/view.mdw")(app);
-// require("./middlewares/locals.mdw")(app);
+require("./middlewares/locals.mdw")(app);
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 /** END config app */
 
 /** START router */
 
-// app.use(
-//   "/manage",
-//   restrict,
-//   acl.middleware(1),
-//   require("./routes/manage.route")
-// );
+app.use(
+  "/manage",
+  restrict,
+  acl.middleware(1),
+  require("./routes/manage.route")
+);
 
-app.get('/', function (req, res) {
-  res.render('html/home')
+//Template
+app.get('/template', function (req, res) {
+  res.render('html/home', { layout: false })
 })
-app.get('/login', function (req, res) {
-  res.render('html/login')
+app.get('/template/login', function (req, res) {
+  res.render('html/login',  { layout: false })
 })
-app.get('/register', function (req, res) {
-  res.render('html/register')
+app.get('/template/register', function (req, res) {
+  res.render('html/register',  { layout: false })
 })
-app.get('/account', function (req, res) {
-  res.render('html/account')
+app.get('/template/account', function (req, res) {
+  res.render('html/account',  { layout: false })
 })
-app.get('/admin', function (req, res) {
-  res.render('html/admin')
+app.get('/template/admin', function (req, res) {
+  res.render('html/admin',  { layout: false })
 })
  
+//End Template
 
-// app.use("/", require("./routes/show.route"));
-// app.use("/", require("./routes/share.route"));
+app.use("/", require("./routes/show.route"));
+app.use("/", require("./routes/share.route"));
 
-// //Error
-// app.use(function (req, res) {
-//   res.render("vwShare/404", { layout: "show" });
-// });
+//Error
+app.use(function (req, res) {
+  res.render("vwShare/404", { layout: "show" });
+});
 
-// app.use(function (err, req, res, next) {
-//   console.error(err.stack);
-//   res.status(500).render("vwShare/500", { html: "home" });
-// });
+app.use(function (err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).render("vwShare/500", { layout: "show" });
+});
 
 /** END router */
 

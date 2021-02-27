@@ -1,6 +1,6 @@
 
 <!-- Top Header Area -->
-<div class="top-header-area mb-3">
+{{!-- <div class="top-header-area mb-3">
   <div class="container">
     <div class="row align-items-center">
       <div class="col-12 col-md-6">
@@ -59,6 +59,64 @@
       </div>
     </div>
   </div>
-</div>
+</div> --}}
 
-<!-- Navbar Area -->
+
+
+<!-- Top Header Area -->
+<div class="row header">
+        <div class="grid wide">
+            <div class="row">
+                <div class="col l-2">
+                    <a href="#" class="header-logo">
+                        <img src="../../public/resources/favicons/android-chrome-96x96.png" alt="logo">
+                        <span class="header-logo__name">VnTourism</span>
+                    </a>
+                </div>
+                <div class="col l-8">
+                    <ul class="header-nav">
+                        <li class="header-nav__item"><a href="#" class="header-nav__link">Điểm đến</a></li>
+                        <li class="header-nav__item"><a href="#" class="header-nav__link">Kinh nghiệm</a></li>
+                        <li class="header-nav__item"><a href="#" class="header-nav__link">Hình ảnh</a></li>
+                        <li class="header-nav__item"><a href="#" class="header-nav__link">Cộng động</a></li>
+                        <li class="header-nav__item"><a href="#" class="header-nav__link">TravelMap</a></li>
+                        <li class="header-nav__item"><a href="#" class="header-nav__link">Tiện ích</a></li>
+                    </ul>
+                </div>
+
+                <!-- Chưa đăng nhập -->
+                {{#unless lcIsAuthenticated}}
+                <div class="col l-2">
+                    <div class="header-right">
+                        <a href='/login?retURL={{curURL}}' class="btn btn-center-center btn-primary">Đăng nhập</a>
+                    </div>
+                </div>
+                {{else}}
+                <!-- Đã đăng nhập -->
+                <div class="col l-2">
+                    <div class="header-right">
+                        <div class="account">
+                            <input type="checkbox" id="account--checked" class="account--checked">
+                            <label for="account--checked" class="overlay"></label>
+                            <label for="account--checked" class="account__btn">
+                                <img src="../../public/resources/img/bg-signin.jpg" alt="button account"
+                                width="48px" height="48px">
+                            </label>
+                            <ul class="account-box">
+                                <li class="account-box__item">
+                                    <a href="/updateProfile" for="account--checked">Thông tin cá nhân</a>
+                                </li>
+                                <li class="account-box__item">
+                                  <form action="/logout" method="POST">
+                                    <button style="width: 100%; padding: 5px 0px 5px 0px;" type="submit" >Đăng xuất</button>
+                                  </form>
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                {{/unless}}
+            </div>
+        </div>
+    </div>
