@@ -1,0 +1,41 @@
+.title{
+    
+    width: 100%;
+    font-family: inherit;
+    text-align: center;
+
+    &__heading{
+        position: relative;
+        font-size: 25px;
+        font-weight: 500;
+    }
+    &__caption{
+        font-size: 16px;
+        letter-spacing: 2px;
+        padding: 24px 0;
+        display: inline-block;
+        position: relative;
+    }
+
+    &__caption::after{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 2px;
+        background-color: $color-primary;
+    }
+
+    &-sub{
+        border-left: 4px solid $color-primary;
+        padding-left: 12px;
+
+        font-family: 'Roboto', sans-serif;
+        font-size: 22px;
+        &__heading{
+            font-weight: 300;
+        }
+    }
+}

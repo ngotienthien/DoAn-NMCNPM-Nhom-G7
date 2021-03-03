@@ -6,10 +6,12 @@
     
     height: $height-primary;
 
-    box-shadow: 0 2px 5px $color-shadow;
-    background-color: rgba($color-light, 0.7);
+    box-shadow: 0 10px 15px rgba(116, 116, 116, .7);
+    background-color: rgba(243, 243, 243, .9);
     z-index: 100;
-    
+
+    backdrop-filter: blur(5px);
+
     &-logo{
         display: flex;
         width: 100%;
@@ -71,6 +73,7 @@
         }
 
         .account{
+            margin-top: 0px !important;
             &__btn{
                 display: block;
                 position: absolute;
