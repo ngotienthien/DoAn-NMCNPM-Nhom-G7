@@ -103,9 +103,7 @@
                 &:focus{
                     @extend %btn-login--hoverfocus;
                 }
-                &:active{
-                    @extend %btn-login--active;
-                }
+
             }
         }
         &-link__forgot,
