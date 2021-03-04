@@ -18,13 +18,6 @@
 	- trang xem chi tiết bài viết do phong viên viết(manage/articles/detailArticle/byWriter). (7)
 	- trang chỉnh sửa bài viết cho phóng viên(manage/articles/editArticle/byWriter). (9)
 
-* editor
-	- trang xem danh sách bài viết của phong viên đăng vào chuyên mục do mình quản lý dành cho biên tập viên(manage/articles/byEditor). (6)
-	- trang xem chi tiết bài viết của phóng viên đăng vào chuyên mục do mình quản lý dành cho biên tập viên(manage/articles/detailArticle/byEditor).(7)
-	- trang từ chối bài viết(manage/articles/refuse/<idArticle>).(10)
-	- trang duyệt bài viết(manage/articles/approve/<idArticle>).(11)
-
-
 * administrator
 - Quản lý chuyên mục
 	+ xem danh sách chuyên mục(manage/categories/listCategories).(14)
