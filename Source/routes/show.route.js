@@ -84,7 +84,6 @@ router.get("/details", async function (req, res) {
   const getId = req.query.id;
   const single = articleModel.singleArticle(getId);
   
-  console.log(single)
   const [
     listCateSub,
     detailsPost,
@@ -100,7 +99,6 @@ router.get("/details", async function (req, res) {
     articleModel.Top6RelationshipRand(getId),
     commentModel.allCommentIdArticle(getId)
   ]);
-  console.log(listArticle)
   // update Views
   var newViews = detailsPost[0].Views + 1;
   articleModel.upViews(getId, newViews);
