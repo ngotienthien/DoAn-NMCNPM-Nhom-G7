@@ -63,26 +63,28 @@ router.get("/", async function (req, res) {
 });
 
 
-router.post("/details", async function (req, res) {
-  var text = req.body.commentText;
-  var id = req.body.id;
-  var date = new Date();
+// router.post("/details", async function (req, res) {
+//   var text = req.body.commentText;
+//   var id = req.body.id;
+//   var date = new Date();
 
-  var entity = {
-    IDArticle: id,
-    IDUser: res.locals.lcAuthUser.IDUser,
-    Date: date,
-    Comment: text
-  }
+//   var entity = {
+//     IDArticle: id,
+//     IDUser: res.locals.lcAuthUser.IDUser,
+//     Date: date,
+//     Comment: text
+//   }
 
-  commentModel.addComment(entity);
+//   commentModel.addComment(entity);
 
-  return res.redirect(`/details?id=${id}#comment`);
-});
+//   return res.redirect(`/details?id=${id}#comment`);
+// });
 
+//Chi tiết bài viết
 router.get("/details", async function (req, res) {
   const getId = req.query.id;
-  const single = articleModel.singleArticle(getId);
+  const single = await articleModel.singleArticle(getId);
+  
   const [
     listCateSub,
     detailsPost,
@@ -95,7 +97,7 @@ router.get("/details", async function (req, res) {
     articleModel.singleArticle(getId),
     categoryModel.allCate(),
     categoryModel.allCateNumber(),
-    articleModel.Top6RelationshipRand(getId),
+    articleModel.Top6RelationshipRand(getId, single[0].IDCategory, single[0].IDSubCategory),
     commentModel.allCommentIdArticle(getId)
   ]);
 
@@ -140,6 +142,7 @@ router.get("/details", async function (req, res) {
   });
 });
 
+//Các tỉnh thành
 router.get("/category", async function (req, res) {
   const getId = req.query.id;
   const [
@@ -183,7 +186,7 @@ router.get("/category", async function (req, res) {
   });
 });
 
-
+// Các địa điểm
 router.get("/place", async function (req, res) {
   const getId = req.query.id;
 
@@ -197,14 +200,35 @@ router.get("/place", async function (req, res) {
     articleModel.singleWithSubCategory(getId)
   ]);
 
-  console.log(listArticle);
-
   res.render("vwShow/vwArticles/listCateSub", {
     listCateSub,
     subCate: subCate[0],
     listArticle
   });
 });
+
+
+// Tìm kiếm
+router.get("/search-location", async function (req, res) {
+  const text = req.query.text;
+
+  const [
+    listCateSub,
+    listArticle
+  ] = await Promise.all([
+    categoryModel.allSubCate(),
+    articleModel.allWithSearch(text)
+  ]);
+
+
+  res.render("vwShow/vwArticles/search", {
+    listCateSub,
+    text,
+    listArticle
+  });
+});
+
+
 
 ////////////////////////////////
 router.post("/getMore", async function (req, res) {
@@ -258,7 +282,16 @@ router.get(`/login`, async function (req, res) {
     notification = "Username or Password was wrong";
   }
 
-  res.render("vwShow/login", {notificationLogin : notification});
+  const [
+    listCateSub
+  ] = await Promise.all([
+    categoryModel.allSubCate(),
+  ]);
+
+  res.render("vwShow/login", {
+    notificationLogin : notification,
+    listCateSub
+  });
 });
 
 router.post('/login', function(req, res, next) {

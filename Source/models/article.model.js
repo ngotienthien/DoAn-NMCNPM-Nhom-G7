@@ -42,7 +42,7 @@ module.exports = {
     `);
   },
 
-  Top6RelationshipRand: function (id) {
+  Top6RelationshipRand: function (id, idCate, idSub) {
     return db.load(`
     SELECT art.IDArticle, art.Title, art.Avatar,
       u.IDUser, u.FullName, u.Avatar avtWriter,
@@ -51,8 +51,8 @@ module.exports = {
     FROM article art, users u, sub_categories sub
     WHERE u.IDUser = art.Writter and art.Status = 4
     and sub.IDSubCategory = art.IDSubCategory
-    and art.IDCate <> ${id}
-    
+    and art.IDArticle  <> ${id}
+    and (art.IDCate = ${idCate} or art.IDSubCategory = ${idSub})
     ORDER BY Rand() LIMIT 6
     `);
   },
@@ -117,6 +117,20 @@ module.exports = {
     SET Views = ${newViews}
     WHERE IDArticle = ${id}
     `);
+  },
+
+  allWithSearch: function (text){
+    return db.load(`
+    SELECT art.IDArticle, art.Title, art.Avatar,
+      u.IDUser, u.FullName, u.Avatar avtWriter,
+      art.Abstract, art.Views, art.TimePublish, 
+      art.IDSubCategory,sub.SubCategoryName,
+      MATCH (art.Title, art.Abstract) AGAINST ("${text}") as score
+    FROM article art, users u, sub_categories sub
+    WHERE u.IDUser = art.Writter and art.Status = 4
+    AND sub.IDSubCategory = art.IDSubCategory
+    AND MATCH (art.Title, art.Abstract) AGAINST ("${text}") > 0
+    `)
   },
 
   /////////////////////////////////////
@@ -185,6 +199,7 @@ module.exports = {
     return db.load(`select a.IDArticle id,t.TagName from ${TBL_article} a join article_tag art on a.IDArticle = art.IDArticle join tags t on art.IDTag = t.IDTag where a.IDArticle = ${id}
     `);
   },
+
 
   // singleWithSubCategory: function (id) {
   //   return db.load(`select a.IDArticle id,sc.SubCategoryName from ${TBL_article} a join sub_categories sc on a.IDCate = sc.IDCategory and a.IDSubCategory = sc.IDSubCategory where a.IDArticle =  ${id}

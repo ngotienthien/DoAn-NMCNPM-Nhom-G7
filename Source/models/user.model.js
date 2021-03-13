@@ -33,7 +33,7 @@ module.exports = {
   },
   singleByUserName: async function (username) {
     const rows = await db.load(
-      `select US.IDUser, US.UserName, US.Password, US.TypeOfUser, TofUS.TypeName, USp.IDUser as Premium ,USp.DateEnd 
+      `select US.IDUser, US.UserName, US.Password, US.TypeOfUser, US.Avatar, TofUS.TypeName, USp.IDUser as Premium ,USp.DateEnd 
       FROM ${TBL_users} US join ${TBL_typeOfUser} TofUS on US.TypeOfUser = TofUS.IDType LEFT JOIN user_premium USp ON USp.IDUser = US.IDUser
       where US.UserName = '${username}'`
     );
@@ -60,7 +60,7 @@ module.exports = {
 
   infoUserByID: async function (id) {
     const rows = await db.load(
-      `select UserName, FullName, Phone, Email, Address, DATE_FORMAT(DOB, "%d/%m/%Y") as DOB, NickName, TypeOfUser from ${TBL_users} where IDUser = ${id}`
+      `select UserName, FullName, Phone, Email, Address, DATE_FORMAT(DOB, "%d/%m/%Y") as DOB, NickName, TypeOfUser, Avatar from ${TBL_users} where IDUser = ${id}`
     );
     if (rows.length === 0) return null;
 
