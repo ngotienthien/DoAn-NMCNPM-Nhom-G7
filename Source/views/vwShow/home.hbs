@@ -2,9 +2,6 @@
     <div class="grid slider">
         <div class="row">
             <div class="col l-4 slider-box">
-                <div class="slider-box__upload">
-                    <a href="#"><span><i class="fas fa-plus"></i> Tạo bài viết riêng</span></a>
-                </div>
                 <div class="slider-box__search">
                     <h3 class="slider-box__heading">
                         Khám phá theo cách của bạn
@@ -39,7 +36,7 @@
 
     </div>
     <!-- End Slider -->
-<!-- Begin Theme -->
+    <!-- Begin Theme -->
     <section class="grid wide section-container theme">
         <div class="row">
             <div class="col l-3">
@@ -113,13 +110,64 @@
                 <span class="title__caption">Những bài viết - khoảnh khắc độc đáo</span>
             </div>
         </div>
+
+        {{!--Begin 8 Bài viết ngẫu nhiên --}}
+        <div class="title-sub">
+            <h3 class="title-sub__heading">Gợi ý cho bạn</h3>
+        </div>
+        <div class="post">
+            <div class="row">
+                {{#if list4Rand}}
+                <!-- 8 Item Small -->
+                {{#each list4Rand}}
+                <div class="col l-3">
+                    <a href="/details?id={{IDArticle}}" class="post-item post-item--small">
+                        <div class="post-item__img">
+                            <img 
+                                src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" 
+                                alt="Background">
+                        </div>  
+                        <div class="post-info">
+                            <div class="">
+                                <h3 class="post-info__heading">{{Title}}</h3>
+                                <p class="post-info__paragraph">
+                                {{Abstract}}   
+                                </p>
+                            </div>
+                        </div>
+                        <div class="post-info-avt">
+                            <img src="../../public/images/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                        </div>
+                        <div class="post-time">
+                            <span class="post-time-item">
+                                <i class="fas fa-eye"></i> {{Views}}
+                            </span>
+                            <span class="post-time-item">
+                                {{#format_date_time TimePublish}}{{/format_date_time}}
+                            </span>
+                            <span class="post-time-item">
+                                {{SubCategoryName}}
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                {{/each}}
+                {{else}}
+                Không có bài viết
+                {{/if}}
+            </div>
+        </div>
+        {{!--End 8 Bài viết ngẫu nhiên --}}
+
+
+
         <!-- Begin Section Blog -->
         <div class="title-sub">
             <h3 class="title-sub__heading">Lượt xem cao nhất</h3>
         </div>
         <div class="post">
             <div class="row">
-                {{#if listTop3Views}}
+                {{!-- {{#if listTop3Views}}
                 <!-- 3 Item Big -->
                 <div class="post-item--big">
                     {{#each listTop3Views}}
@@ -139,7 +187,7 @@
                                 </div>
                             </div>
                             <div class="post-info-avt">
-                                <img src="../../assets/resources/img/user/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                                <img src="../../public/images/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
                             </div>
                             <div class="post-time">
                                 <span class="post-time-item">
@@ -155,9 +203,11 @@
                         </a>
                     </div>
                     {{/each}}
-                </div>
+                </div> --}}
+
+                {{#if listTop12Views}}
                 <!-- 8 Item Small -->
-                {{#each listTop8ViewsLast}}
+                {{#each listTop12Views}}
                 <div class="col l-3">
                     <a href="/details?id={{IDArticle}}" class="post-item post-item--small">
                         <div class="post-item__img">
@@ -174,7 +224,7 @@
                             </div>
                         </div>
                         <div class="post-info-avt">
-                            <img src="../../assets/resources/img/user/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                            <img src="../../public/images/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
                         </div>
                         <div class="post-time">
                             <span class="post-time-item">
@@ -196,6 +246,54 @@
             </div>
         </div>
         <!-- End Section Blog -->
+
+        <!-- Begin Section NEW BLOG -->
+        <div class="title-sub">
+            <h3 class="title-sub__heading">Các bài viết mới nhất</h3>
+        </div>
+        <div class="post">
+            <div class="row">
+                {{#if listTop12Time}}
+                <!-- 12 Item Small -->
+                {{#each listTop12Time}}
+                <div class="col l-3">
+                    <a href="/details?id={{IDArticle}}" class="post-item post-item--small">
+                        <div class="post-item__img">
+                            <img 
+                                src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" 
+                                alt="Background">
+                        </div>  
+                        <div class="post-info">
+                            <div class="">
+                                <h3 class="post-info__heading">{{Title}}</h3>
+                                <p class="post-info__paragraph">
+                                {{Abstract}}   
+                                </p>
+                            </div>
+                        </div>
+                        <div class="post-info-avt">
+                            <img src="../../public/images/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                        </div>
+                        <div class="post-time">
+                            <span class="post-time-item">
+                                <i class="fas fa-eye"></i> {{Views}}
+                            </span>
+                            <span class="post-time-item">
+                                {{#format_date_time TimePublish}}{{/format_date_time}}
+                            </span>
+                            <span class="post-time-item">
+                                {{SubCategoryName}}
+                            </span>
+                        </div>
+                    </a>
+                </div>
+                {{/each}}
+                {{else}}
+                Không có bài viết
+                {{/if}}
+            </div>
+        </div>
+        <!-- End Section New BLOG -->
     </section>
     <!-- End Content -->
 
@@ -218,9 +316,9 @@
                 {{#if listTop12Place}}
                 {{#each listTop12Place}}
                 <div class="col l-3">
-                    <a href="#" class="post-item place-item">
+                    <a href="/category?id={{IDCategory}}" class="post-item place-item">
                         <div class="post-item__img">
-                            <img src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" alt="First item">
+                            <img src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" alt="{{CategoryName}}">
                         </div>  
                         <div class="place-info">
                             <h3 class="place-info__heading">{{CategoryName}}</h3>

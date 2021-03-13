@@ -14,14 +14,17 @@ module.exports = {
     SELECT c.IDCategory, c.CategoryName, COUNT(c.IDCategory) Number
     FROM cate c, article a
     WHERE c.Status = 1
+    and a.Status = 3
     and c.IDCategory = a.IDCate
+    GROUP BY c.IDCategory, c.CategoryName
     ORDER BY Number`);
   },
 
   allSubCate: function () {
     //use show.route.js with get "/" (home header -> Điểm đến)
     return db.load(
-      `SELECT IDSubCategory, IDCategory, SubCategoryName FROM sub_categories WHERE status = 1`
+      `SELECT IDSubCategory, IDCategory, SubCategoryName 
+      FROM sub_categories WHERE status = 1`
     );
   },
 

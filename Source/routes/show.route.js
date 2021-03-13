@@ -13,7 +13,6 @@ const moment = require("moment");
 const config = require("../config/default.json");
 const bcryptjs = require("bcryptjs");
 const LRU = require("lru-cache");
-const { Top12Place } = require("../models/article.model");
 
 var transporter = nodemailer.createTransport({
   service: "gmail",
@@ -30,50 +29,74 @@ router.use(function (req, res, next) {
 router.get("/", async function (req, res) {
   const [
     listCateSub,
-    resultTop11View,
+    result4Rand,
+    resultTop12Views,
+    resultTop12Time,
     resultTop12Place
   ] = await Promise.all([
     categoryModel.allSubCate(),
-    articleModel.Top11Views(),
+    articleModel.Top4Rand(),
+    articleModel.Top12Views(),
+    articleModel.Top12Time(),
     articleModel.Top12Place()
   ]);
 
-  console.log(resultTop11View);
+  // Tách 3 Views đầu và 8 Views sau để hiển thị
+  // var top3View = [];
+  // var top8ViewLast = [];
+  // for (var top = 0; top < resultTop11View.length; top++){
+  //   if (top < 3){
+  //     top3View.push(resultTop11View[top]);
+  //   }
+  //   else{
+  //     top8ViewLast.push(resultTop11View[top]);
+  //   }
+  // }
 
-  var top2View = [];
-  var top8ViewLast = [];
-  for (var top = 0; top < resultTop11View.length; top++){
-    if (top < 2){
-      top2View.push(resultTop11View[top]);
-    }
-    else{
-      top8ViewLast.push(resultTop11View[top]);
-    }
-  }
   res.render("vwShow/home", {
     listCateSub,
-    listTop3Views: top2View,
-    listTop8ViewsLast: top8ViewLast,
+    list4Rand: result4Rand,
+    listTop12Views: resultTop12Views,
+    listTop12Time: resultTop12Time,
     listTop12Place: resultTop12Place
   });
 });
 
 
+router.post("/details", async function (req, res) {
+  var text = req.body.commentText;
+  var id = req.body.id;
+  var date = new Date();
+
+  var entity = {
+    IDArticle: id,
+    IDUser: res.locals.lcAuthUser.IDUser,
+    Date: date,
+    Comment: text
+  }
+
+  commentModel.addComment(entity);
+
+  return res.redirect(`/details?id=${id}#comment`);
+});
+
 router.get("/details", async function (req, res) {
   const getId = req.query.id;
-  
+  const single = articleModel.singleArticle(getId);
   const [
     listCateSub,
     detailsPost,
     listCate,
     listCateNumber,
-    listArticle
+    listArticle,
+    listComment
   ] = await Promise.all([
     categoryModel.allSubCate(),
     articleModel.singleArticle(getId),
     categoryModel.allCate(),
     categoryModel.allCateNumber(),
-    articleModel.Top11Views()
+    articleModel.Top6RelationshipRand(getId),
+    commentModel.allCommentIdArticle(getId)
   ]);
 
   // update Views
@@ -112,7 +135,8 @@ router.get("/details", async function (req, res) {
     listCateSub,
     detailsPost: detailsPost[0],
     listCate,
-    listArticle
+    listArticle,
+    listComment
   });
 });
 

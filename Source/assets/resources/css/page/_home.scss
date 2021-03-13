@@ -73,14 +73,18 @@
         box-shadow: 0 0 20px #ccc;
         border-radius: 20px;
         transition: all .3s ease;
-        
+        width: 100%;
+        min-height: 350px;
+
         overflow: hidden;
+
         &__img{
             width: 100%;
             height: 300px;
             overflow: hidden;
             img{
                 width: 100%;
+                height: 100%;
             }
             border-radius: 20px 20px 0 0;
             // clip-path: ellipse(100% 95% at 50% 0%);
@@ -107,6 +111,13 @@
             font-weight: 500;
             margin-top: 4px;
             margin-bottom: 4px;
+            letter-spacing: 1px;
+            line-height: 20px;
+            height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: pre-wrap;
+
         }
         &__paragraph{
             letter-spacing: 1px;
@@ -114,6 +125,7 @@
             height: 40px;
             overflow: hidden;
             text-overflow: ellipsis;
+            white-space: pre-wrap;
         }
         &-avt{
             position: absolute;
@@ -135,8 +147,13 @@
     &-item--big{
         position: relative;
         overflow: hidden;
+        display: flex;
+        flex-direction: row;
         .blog-item__img{
             height: 250px;
+        }
+        .post-item{
+            min-height: 450px;
         }
         .blog-info{
             position: absolute;
