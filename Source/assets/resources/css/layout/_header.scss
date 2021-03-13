@@ -12,6 +12,10 @@
 
     backdrop-filter: blur(5px);
 
+    &--relative{
+        position: relative;
+    }
+
     &-logo{
         display: flex;
         width: 100%;
@@ -40,13 +44,19 @@
             padding: 0 12px;
             line-height: $height-primary;
             transition: background-color .3s ease;
-        }
 
-        &__item:hover,
-        &__item:active{
-            border-bottom: 2px solid $color-primary;
-            background-color: rgba(170, 170, 170, 0.3);
-        }
+            &:hover > .header-nav-sub{
+                opacity: 1;
+                visibility: visible;
+            }    
+
+            &:hover,
+            &:active{
+                border-bottom: 2px solid $color-primary;
+                background-color: rgba(170, 170, 170, 0.3);
+            }
+
+        }    
 
         &__link{
             @include fontcolor(18px, $color-header);
@@ -54,6 +64,49 @@
                 outline: none;
                 font-size: 22px;
                 font-weight: bolder;
+            }
+        }
+
+        &-sub{
+            position: absolute;
+            top: 105%;
+
+            left: 0;
+
+            min-width: 100%;
+            min-height: 50px;
+
+            list-style-type: none;
+            background-color: $color-light;
+
+            box-shadow: 0 10px 20px #ccc;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            opacity: 0;
+            visibility: hidden;
+            transition: all .3s ease;
+
+            &__item{
+                padding-left: 20px;
+                max-width: 100%;
+                flex-basis: 25%;
+                
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                
+                &--link{
+                    text-decoration: none;
+                    color: black;
+                }
+
+                &:hover{
+                    background-color: $color-primary-light;
+
+                }
             }
         }
     }

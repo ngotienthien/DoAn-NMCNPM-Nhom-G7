@@ -7,6 +7,7 @@
     box-shadow: inset 0px 11px 8px -10px #CCC;
 }
 
+
 .theme{
     &-item{
         &__img{
@@ -76,13 +77,21 @@
         overflow: hidden;
         &__img{
             width: 100%;
-            height: 200px;
+            height: 300px;
             overflow: hidden;
             img{
                 width: 100%;
             }
             border-radius: 20px 20px 0 0;
             // clip-path: ellipse(100% 95% at 50% 0%);
+        }
+
+        &--small &__img{
+            height: 200px;
+        }
+
+        &--small .post-time{
+            flex-direction: column;
         }
     }
     &-info{
@@ -102,6 +111,9 @@
         &__paragraph{
             letter-spacing: 1px;
             line-height: 20px;
+            height: 40px;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         &-avt{
             position: absolute;
@@ -137,6 +149,26 @@
             bottom: 0;
         }
     }
+
+    &-time{
+        font-size: 13px;
+        opacity: .6;
+        color: black;
+        font-family: cursive;
+        padding: 5px 12px;
+        
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        flex-wrap: wrap;
+
+        &-item{
+            margin-left: 12px;
+
+        }
+    }
+
+
 }
 
 

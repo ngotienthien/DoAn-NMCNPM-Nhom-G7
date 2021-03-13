@@ -66,7 +66,7 @@
 <!-- Top Header Area -->
 <div class="row header">
         <div class="grid wide">
-            <div class="row">
+            <div class="row header--relative">
                 <div class="col l-2">
                     <a href="/" class="header-logo">
                         <img src="../../assets/resources/favicons/android-chrome-96x96.png" alt="logo">
@@ -75,12 +75,21 @@
                 </div>
                 <div class="col l-8">
                     <ul class="header-nav">
-                        <li class="header-nav__item"><a href="#" class="header-nav__link">Điểm đến</a></li>
-                        <li class="header-nav__item"><a href="#" class="header-nav__link">Kinh nghiệm</a></li>
+                        <li class="header-nav__item"><a href="" class="header-nav__link">Điểm đến <i class="fas fa-sort-down"></i></a>
+                          <ul class="header-nav-sub">
+                            {{#each listCateSub}}
+                            <li class="header-nav-sub__item">
+                              <a  class="header-nav-sub__item--link" 
+                              href="/place?id={{IDSubCategory}}">
+                              {{SubCategoryName}}
+                              </a>
+                            </li>
+                            {{/each}}
+                          </ul>
+                        </li>
+                        <li class="header-nav__item"><a href="/category?id=1" class="header-nav__link">Tỉnh</a></li>
                         <li class="header-nav__item"><a href="#" class="header-nav__link">Hình ảnh</a></li>
-                        <li class="header-nav__item"><a href="#" class="header-nav__link">Tao Lich Trinh</a></li>
-                        <li class="header-nav__item"><a href="#" class="header-nav__link">TravelMap</a></li>
-                        <li class="header-nav__item"><a href="#" class="header-nav__link">Tiện ích</a></li>
+                        <li class="header-nav__item"><a href="#" class="header-nav__link">Tạo lịch trình</a></li>
                     </ul>
                 </div>
 

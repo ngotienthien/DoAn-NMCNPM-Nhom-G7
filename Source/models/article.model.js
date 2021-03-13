@@ -3,6 +3,81 @@ const { text } = require("express");
 
 const TBL_article = "article";
 module.exports = {
+  // Use Home Top views and Top place
+  Top11Views: function () {
+    return db.load(`
+    SELECT art.IDArticle, art.Title, art.Avatar,
+      u.IDUser, u.FullName, u.Avatar avtWriter,
+      art.Abstract, art.Views, art.TimePublish, 
+      art.IDSubCategory,sub.SubCategoryName
+    FROM article art, users u, sub_categories sub
+    WHERE u.IDUser = art.Writter and art.Status = 3
+    and sub.IDSubCategory = art.IDSubCategory
+    ORDER BY art.Views DESC LIMIT 11
+    `);
+  },
+  Top12Place: function(){
+    return db.load(`
+    select c.IDCategory, c.CategoryName,
+      COUNT(c.IDCategory) count
+    from cate c, sub_categories s
+    where c.IDCategory = s.IDCategory
+    and c.Status = 1
+    and s.Status = 1
+    GROUP BY c.IDCategory, c.CategoryName
+    ORDER BY count DESC LIMIT 12
+    `);
+  },
+  singleArticle: function(id){
+    return db.load(`
+    Select art.IDArticle, art.Title, art.Content, art.Avatar,
+      art.BigAvatar, art.TimePublish,
+      c.IDCategory, c.CategoryName as NameCate, s.IDSubCategory, s.SubCategoryName as NameSub,
+      art.Views, u.FullName, u.Avatar as AvtWritter
+    from article art, cate c, sub_categories s, users u
+    where art.IDArticle = ${id}
+    and c.IDCategory = art.IDCate
+    and s.IDSubCategory = art.IDSubCategory
+    and u.IDUser = art.Writter
+    and art.status = 3
+    `);
+  },
+  singleWithCategory: function (id) {
+    return db.load(
+      `SELECT art.IDArticle, art.Title, art.Avatar,
+      u.IDUser, u.FullName, u.Avatar avtWriter,
+      art.Abstract, art.Views, art.TimePublish, 
+      art.IDSubCategory,sub.SubCategoryName
+    FROM article art, users u, sub_categories sub
+    WHERE u.IDUser = art.Writter and art.Status = 3
+    and sub.IDSubCategory = art.IDSubCategory
+    and art.IDCate = ${id}
+    ORDER BY art.TimePublish`
+    );
+  },
+  singleWithSubCategory: function (id) {
+    return db.load(`
+    SELECT art.IDArticle, art.Title, art.Avatar,
+      u.IDUser, u.FullName, u.Avatar avtWriter,
+      art.Abstract, art.Views, art.TimePublish, 
+      art.IDSubCategory,sub.SubCategoryName
+    FROM article art, users u, sub_categories sub
+    WHERE u.IDUser = art.Writter and art.Status = 3
+    and sub.IDSubCategory = art.IDSubCategory
+    and art.IDSubCategory = ${id}
+    ORDER BY art.TimePublish
+    `);
+  },
+
+  upViews: function(id, newViews){
+    return db.load(`
+    UPDATE article
+    SET Views = ${newViews}
+    WHERE IDArticle = ${id}
+    `);
+  },
+
+  /////////////////////////////////////
   allArticle: function () {
     return db.load(`SELECT art.IsPremium ,art.IDArticle ,art.Title, art.Avatar,art.Views,art.Ranks, art.TimePublish, art.IDCate, 
     c.CategoryName, art.IDSubCategory, subcate.SubCategoryName, count(CM.comment) as numofCM
@@ -68,15 +143,11 @@ module.exports = {
     return db.load(`select a.IDArticle id,t.TagName from ${TBL_article} a join article_tag art on a.IDArticle = art.IDArticle join tags t on art.IDTag = t.IDTag where a.IDArticle = ${id}
     `);
   },
-  singleWithCategory: function (id) {
-    return db.load(
-      `select distinct a.IDArticle id,c.CategoryName from ${TBL_article} a join cate c on a.IDCate = c.IDCategory where  a.IDArticle = ${id}`
-    );
-  },
-  singleWithSubCategory: function (id) {
-    return db.load(`select a.IDArticle id,sc.SubCategoryName from ${TBL_article} a join sub_categories sc on a.IDCate = sc.IDCategory and a.IDSubCategory = sc.IDSubCategory where a.IDArticle =  ${id}
-    `);
-  },
+
+  // singleWithSubCategory: function (id) {
+  //   return db.load(`select a.IDArticle id,sc.SubCategoryName from ${TBL_article} a join sub_categories sc on a.IDCate = sc.IDCategory and a.IDSubCategory = sc.IDSubCategory where a.IDArticle =  ${id}
+  //   `);
+  // },
 
   newTime: function (current, limit) {
     return db.load(`SELECT art.IsPremium ,art.IDArticle, art.Title, art.Avatar, art.Views,art.Ranks, art.Abstract,art.TimePublish, 
@@ -89,17 +160,7 @@ module.exports = {
     c.CategoryName, us.FullName, art.IDSubCategory, subcate.SubCategoryName 
     ORDER BY art.TimePublish DESC LIMIT ${limit} OFFSET ${current}`);
   },
-  Top10Views: function () {
-    return db.load(`SELECT art.IsPremium ,art.IDArticle, art.Title, art.Avatar, art.Views,art.Ranks, art.Abstract,art.TimePublish, 
-    art.IDCate, c.CategoryName, us.FullName, art.IDSubCategory, subcate.SubCategoryName, count(CM.comment) as numofCM 
-    FROM ${TBL_article} art LEFT JOIN cate c on art.IDCate = c.IDCategory LEFT JOIN comment CM on CM.IDArticle = art.IDArticle 
-    LEFT JOIN users us ON art.Writter = us.IDUser LEFT JOIN sub_categories subcate ON subcate.IDCategory = art.IDCate 
-    AND subcate.IDSubCategory = art.IDSubCategory 
-    Where art.Status = 4 AND art.TimePublish <= now()
-    GROUP BY art.IDArticle, art.Title, art.Avatar,art.Views,art.Ranks, art.TimePublish, art.IDCate, 
-    c.CategoryName, us.FullName, art.IDSubCategory, subcate.SubCategoryName 
-    ORDER BY art.Views DESC LIMIT 10`);
-  },
+  
   Top3Views: function () {
     return db.load(`SELECT art.IsPremium ,art.IDArticle, art.Title, art.Avatar, art.Views,art.Ranks, art.Abstract,art.TimePublish, 
     art.IDCate, c.CategoryName, us.FullName, art.IDSubCategory, subcate.SubCategoryName, count(CM.comment) as numofCM 

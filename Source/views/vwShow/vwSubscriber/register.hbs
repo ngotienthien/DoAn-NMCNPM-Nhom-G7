@@ -132,14 +132,17 @@
                     
                     <hr class="login-input--solid">
                     <form class="form-group" action="register" method="post" name="form_register" id="form_register" onsubmit="return validateForm()">
-                        <input type="text" name="UserName" id="idUserName" placeholder="Tên đăng nhập" class="form-group__input margin-t-b-8 btn-radius-20" required>
-                        <input type="password" name="Password" id="idPassword" placeholder="Mật khẩu" class="form-group__input margin-t-b-8 btn-radius-20" required>
-                        <input type="password" name="ConfirmPassword" id="idConfirmPassword" placeholder="Nhập lại mật khẩu" class="form-group__input margin-t-b-8 btn-radius-20" required>
-                        <input type="text" name="FullName" id="idFullName" placeholder="Tên đầy đủ" class="form-group__input margin-t-b-8 btn-radius-20" required>
-                        <input type="text" name="Phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="9" maxlength="11" class="form-group__input margin-t-b-8 btn-radius-20" id="idPhone" placeholder="Điện thoại" required>
-                        <input type="text" name="Email" placeholder="Email@mail.com" class="form-group__input margin-t-b-8 btn-radius-20" id="idEmail" required>
-                        <input type="text" name="Address" class="form-group__input margin-t-b-8 btn-radius-20" id="idAddress" placeholder="Địa chỉ" required>
-                        <input type="text" name="DOB" class="form-group__input margin-t-b-8 btn-radius-20" id="idDOB" placeholder="Ngày sinh" required>
+                        <input type="text" name="UserName" id="idUserName" placeholder="Tên đăng nhập" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" required>
+
+                        <input type="password" name="Password" id="idPassword" placeholder="Mật khẩu" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" required>
+                        <input type="password" name="ConfirmPassword" id="idConfirmPassword" placeholder="Nhập lại mật khẩu" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" required>
+
+
+                        <input type="text" name="FullName" id="idFullName" placeholder="Tên đầy đủ" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" required>
+                        <input type="text" name="Phone" onkeypress='return event.charCode >= 48 && event.charCode <= 57' minlength="9" maxlength="11" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" id="idPhone" placeholder="Điện thoại" required>
+                        <input type="text" name="Email" placeholder="Email@mail.com" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" id="idEmail" required>
+                        <input type="text" name="Address" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" id="idAddress" placeholder="Địa chỉ" required>
+                        <input type="text" name="DOB" class="form-group__input form-group__input--small margin-t-b-8 btn-radius-20" id="idDOB" placeholder="Ngày sinh" required>
                         
           
                         <div class="login-input-btn margin-t-b-8">

@@ -13,6 +13,7 @@ const moment = require("moment");
 const config = require("../config/default.json");
 const bcryptjs = require("bcryptjs");
 const LRU = require("lru-cache");
+const { Top12Place } = require("../models/article.model");
 
 var transporter = nodemailer.createTransport({
   service: "gmail",
@@ -28,27 +29,160 @@ router.use(function (req, res, next) {
 
 router.get("/", async function (req, res) {
   const [
-    resultTop3Trend,
-    resultTop10View,
-    resultNewTime,
-    allArticle,
-    ListNewArticleWithTopCate,
+    listCateSub,
+    resultTop11View,
+    resultTop12Place
   ] = await Promise.all([
-    articleModel.Top3Trend(),
-    articleModel.Top10Views(),
-    articleModel.newTime(0, 10),
-    articleModel.allArticle(),
-    articleModel.NewArticleWithTop10Cate(),
+    categoryModel.allSubCate(),
+    articleModel.Top11Views(),
+    articleModel.Top12Place()
   ]);
+
+  console.log(resultTop11View);
+
+  var top2View = [];
+  var top8ViewLast = [];
+  for (var top = 0; top < resultTop11View.length; top++){
+    if (top < 2){
+      top2View.push(resultTop11View[top]);
+    }
+    else{
+      top8ViewLast.push(resultTop11View[top]);
+    }
+  }
   res.render("vwShow/home", {
-    listTop3Trend: resultTop3Trend,
-    listTop10Views: resultTop10View,
-    listNewTime: resultNewTime,
-    allArticle,
-    ListNewArticleWithTopCate,
+    listCateSub,
+    listTop3Views: top2View,
+    listTop8ViewsLast: top8ViewLast,
+    listTop12Place: resultTop12Place
   });
 });
 
+
+router.get("/details", async function (req, res) {
+  const getId = req.query.id;
+  
+  const [
+    listCateSub,
+    detailsPost,
+    listCate,
+    listCateNumber,
+    listArticle
+  ] = await Promise.all([
+    categoryModel.allSubCate(),
+    articleModel.singleArticle(getId),
+    categoryModel.allCate(),
+    categoryModel.allCateNumber(),
+    articleModel.Top11Views()
+  ]);
+
+  // update Views
+  var newViews = detailsPost[0].Views + 1;
+  articleModel.upViews(getId, newViews);
+
+  // Đếm số lượng trong các tỉnh thành có bao nhiêu bài viết
+  listCate.forEach(function(item){
+    var flag = -1;
+    for (var i = 0; i < listCateNumber.length; i++){
+      if (item.IDCategory === listCateNumber[i].IDCategory){
+        flag = i;
+      }
+    }
+    if (flag === -1){
+      item.Number = 0;
+    }
+    else{
+      item.Number = listCateNumber[flag].Number;
+    }
+  });
+  //Thuật toán sắp xếp tuần tự giảm dần
+  for (var i = 0; i < listCate.length - 1; i++){
+    for (var j = i + 1; j < listCate.length; j++){
+      if (listCate[i].Number < listCate[j].Number){
+        var temp = listCate[i];
+        listCate[i] = listCate[j];
+        listCate[j] = temp;
+      }
+    }
+  }
+  // Lấy top 10 tỉnh
+  if (listCate.length > 10) listCate.length = 10;
+
+  res.render("vwShow/vwArticles/detailArticle", {
+    listCateSub,
+    detailsPost: detailsPost[0],
+    listCate,
+    listArticle
+  });
+});
+
+router.get("/category", async function (req, res) {
+  const getId = req.query.id;
+  const [
+    listCateSub,
+    listCate,
+    listCateNumber,
+    listArticle
+  ] = await Promise.all([
+    categoryModel.allSubCate(),
+    categoryModel.allCate(),
+    categoryModel.allCateNumber(),
+    articleModel.singleWithCategory(getId)
+  ]);
+
+  listCate.forEach(function(item){
+    var flag = -1;
+    for (var i = 0; i < listCateNumber.length; i++){
+      if (item.IDCategory === listCateNumber[i].IDCategory){
+        flag = i;
+      }
+    }
+    if (flag === -1){
+      item.Number = 0;
+    }
+    else{
+      item.Number = listCateNumber[flag].Number;
+    }
+  });
+
+  listCate.forEach(function(item, index){
+    if (item.IDCategory == getId)
+    {
+      item.active = true;
+    }
+  });
+
+  res.render("vwShow/vwArticles/listArticle", {
+    listCateSub,
+    listCate,
+    listArticle
+  });
+});
+
+
+router.get("/place", async function (req, res) {
+  const getId = req.query.id;
+
+  const [
+    listCateSub,
+    subCate,
+    listArticle
+  ] = await Promise.all([
+    categoryModel.allSubCate(),
+    categoryModel.SingleSubCate(getId),
+    articleModel.singleWithSubCategory(getId)
+  ]);
+
+  console.log(listArticle);
+
+  res.render("vwShow/vwArticles/listCateSub", {
+    listCateSub,
+    subCate: subCate[0],
+    listArticle
+  });
+});
+
+////////////////////////////////
 router.post("/getMore", async function (req, res) {
   let data = req.body.data;
   data.current = parseInt(data.current);
