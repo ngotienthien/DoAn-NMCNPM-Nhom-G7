@@ -6,20 +6,22 @@
               <h3>{{detailsPost.Title}}</h3>
           </div>    
       </div>
-      <div class="col l-12">
+  </div>
+  <div class="row">
+    <div class="col l-12">
         <div class="post-time">
           <span><i class="fas fa-eye"></i> {{detailsPost.Views}}</span>
           <span><i class="fas fa-user-plus" aria-hidden="true"></i> {{detailsPost.FullName}}</span>
           <span><i class="fa fa-calendar" aria-hidden="true"></i> {{#format_date_time detailsPost.TimePublish}}{{/format_date_time}}</span>
-          <span><a href="#">{{detailsPost.NameCate}}</a></span>
-          <span><a href="#">{{detailsPost.NameSub}}</a></span>
+          <span><a href="/category?id={{detailsPost.IDCategory}}">{{detailsPost.NameCate}}</a></span>
+          <span><a href="/place?id={{detailsPost.IDSubCategory}}">{{detailsPost.NameSub}}</a></span>
         </div>
       </div>
   </div>
   <div class="row">
       <div class="col l-3">
           <div class="option-settings">
-              <h4 class="option-settings__title">Tất cả các tỉnh</h4>
+              <h4 class="option-settings__title">Các tỉnh nổi bật</h4>
               <ul class="option-settings-list">
                   {{#each listCate}}
                   <li class="option-settings__item">
@@ -31,19 +33,25 @@
           </div>
       </div>
       <div class="col l-9">
-          <pre class="option-contents">
-            <hr>
-            {{detailsPost.Content}}
-          </pre>
+        <hr>
+          <div class="option-contents">
+            {{{detailsPost.Content}}}
+          </div>
       </div>
   </div>
+  </div>
 </div>
+<!-- End Scene -->
 
-<div class="grid wide account">
+{{!-- Bài viết liên quan --}}
+<section>
+<div class="grid wide">
+    <h3 class="art-heading">Bài viết liên quan</h3>
+    <hr>
     <div class="row">
         {{#if listArticle}}
         {{#each listArticle}}
-        <div class="col l-2">
+        <div class="col l-4">
             <a href="/details?id={{IDArticle}}" class="post-item post-item--small">
                 <div class="post-item__img">
                     <img 
@@ -59,7 +67,7 @@
                     </div>
                 </div>
                 <div class="post-info-avt">
-                    <img src="../../assets/resources/img/user/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                    <img src="../../public/images/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
                 </div>
                 <div class="post-time">
                     <span class="post-time-item">
@@ -80,5 +88,6 @@
         {{/if}}
     </div>
 </div>
+</section>
 
-<!-- End Scene -->
+</section>
