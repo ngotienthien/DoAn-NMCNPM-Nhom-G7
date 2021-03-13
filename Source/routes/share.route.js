@@ -25,7 +25,7 @@ router.get("/updateProfile", restrict, async function (req, res) {
   let notificationPasswordUpdated = req.query.notificationPasswordUpdated;
 
   const infoUser = await userModel.infoUserByID(req.user.IDUser);
-
+  console.log(res.locals)
   infoUser.Position = arrPosition[infoUser.TypeOfUser];
 
   if (infoUser.TypeOfUser === 2) infoUser.isWriter = true;

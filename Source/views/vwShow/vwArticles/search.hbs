@@ -1,0 +1,57 @@
+<div class="search-page">
+<section class="grid wide">
+    <div class="row">
+        <form action="/search-location" class="slider-box__form" method="GET">
+            <input type="text" class="slider-box__search--input" name="text"
+            placeholder="Địa điểm ..." value="{{text}}">
+            <button type="submit" class="slider-box__search--btn"><i class="fas fa-search-location">Tìm kiếm</i></button>
+        </form>
+    </div>
+</section>
+</div>
+
+<!-- Begin Scene -->
+<div class="grid wide account">
+  <div class="post">
+        <div class="row">
+            {{#if listArticle}}
+            {{#each listArticle}}
+            <div class="col l-3">
+                <a href="/details?id={{IDArticle}}" class="post-item post-item--small">
+                    <div class="post-item__img">
+                        <img 
+                            src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" 
+                            alt="Background">
+                    </div>  
+                    <div class="post-info">
+                        <div class="">
+                            <h3 class="post-info__heading">{{Title}}</h3>
+                            <p class="post-info__paragraph">
+                            {{Abstract}}   
+                            </p>
+                        </div>
+                    </div>
+                    <div class="post-info-avt">
+                        <img src="../../public/images/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                    </div>
+                    <div class="post-time">
+                        <span class="post-time-item">
+                            <i class="fas fa-eye"></i> {{Views}}
+                        </span>
+                        <span class="post-time-item">
+                            {{#format_date_time TimePublish}}{{/format_date_time}}
+                        </span>
+                        <span class="post-time-item">
+                            {{SubCategoryName}}
+                        </span>
+                    </div>
+                </a>
+            </div>
+            {{/each}}
+            {{else}}
+            Không có bài viết
+            {{/if}}
+        </div>
+    </div>
+</div>
+<!-- End Scene -->

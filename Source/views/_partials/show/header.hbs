@@ -78,7 +78,7 @@
                         <li class="header-nav__item"><a href="/category?id=1" class="header-nav__link">Tỉnh</a></li>
                         <li class="header-nav__item"><a href="" class="header-nav__link">Điểm đến <i class="fas fa-sort-down"></i></a>
                           <ul class="header-nav-sub">
-                            {{#each listCateSub}}
+                            {{#each lcSubCategories}}
                             <li class="header-nav-sub__item">
                               <a  class="header-nav-sub__item--link" 
                               href="/place?id={{IDSubCategory}}">
@@ -86,8 +86,17 @@
                               </a>
                             </li>
                             {{/each}}
+                            {{!-- {{#each listCateSub}}
+                            <li class="header-nav-sub__item">
+                              <a  class="header-nav-sub__item--link" 
+                              href="/place?id={{IDSubCategory}}">
+                              {{SubCategoryName}}
+                              </a>
+                            </li>
+                            {{/each}} --}}
                           </ul>
                         </li>
+                        <li class="header-nav__item"><a href="/search-location" class="header-nav__link"><i class="fas fa-search-location"></i></a></li>
                     </ul>
                 </div>
 
@@ -106,7 +115,8 @@
                             <input type="checkbox" id="account--checked" class="account--checked">
                             <label for="account--checked" class="overlay"></label>
                             <label for="account--checked" class="account__btn">
-                                <img src="../../assets/resources/img/bg-signin.jpg" alt="button account"
+                                {{!--  --}}
+                                <img src="./../../public/images/{{#if lcAuthUser.Avatar}}{{lcAuthUser.Avatar}}{{else}}avt-default.jpg{{/if}}" alt="button account"
                                 width="48px" height="48px">
                             </label>
                             <ul class="account-box">
