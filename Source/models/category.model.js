@@ -14,7 +14,7 @@ module.exports = {
     SELECT c.IDCategory, c.CategoryName, COUNT(c.IDCategory) Number
     FROM cate c, article a
     WHERE c.Status = 1
-    and a.Status = 3
+    and a.Status = 4
     and c.IDCategory = a.IDCate
     GROUP BY c.IDCategory, c.CategoryName
     ORDER BY Number`);

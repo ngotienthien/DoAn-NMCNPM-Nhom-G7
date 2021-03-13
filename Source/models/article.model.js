@@ -11,7 +11,7 @@ module.exports = {
       art.Abstract, art.Views, art.TimePublish, 
       art.IDSubCategory,sub.SubCategoryName
     FROM article art, users u, sub_categories sub
-    WHERE u.IDUser = art.Writter and art.Status = 3
+    WHERE u.IDUser = art.Writter and art.Status = 4
     and sub.IDSubCategory = art.IDSubCategory
     ORDER BY RAND() LIMIT 4
     `);
@@ -23,7 +23,7 @@ module.exports = {
       art.Abstract, art.Views, art.TimePublish, 
       art.IDSubCategory,sub.SubCategoryName
     FROM article art, users u, sub_categories sub
-    WHERE u.IDUser = art.Writter and art.Status = 3
+    WHERE u.IDUser = art.Writter and art.Status = 4
     and sub.IDSubCategory = art.IDSubCategory
     ORDER BY art.Views DESC LIMIT 11
     `);
@@ -36,7 +36,7 @@ module.exports = {
       art.Abstract, art.Views, art.TimePublish, 
       art.IDSubCategory,sub.SubCategoryName
     FROM article art, users u, sub_categories sub
-    WHERE u.IDUser = art.Writter and art.Status = 3
+    WHERE u.IDUser = art.Writter and art.Status = 4
     and sub.IDSubCategory = art.IDSubCategory
     ORDER BY art.TimePublish DESC LIMIT 12
     `);
@@ -49,7 +49,7 @@ module.exports = {
       art.Abstract, art.Views, art.TimePublish, 
       art.IDSubCategory,sub.SubCategoryName
     FROM article art, users u, sub_categories sub
-    WHERE u.IDUser = art.Writter and art.Status = 3
+    WHERE u.IDUser = art.Writter and art.Status = 4
     and sub.IDSubCategory = art.IDSubCategory
     and art.IDCate <> ${id}
     
@@ -81,7 +81,7 @@ module.exports = {
     and c.IDCategory = art.IDCate
     and s.IDSubCategory = art.IDSubCategory
     and u.IDUser = art.Writter
-    and art.status = 3
+    and art.status = 4
     `);
   },
   singleWithCategory: function (id) {
@@ -91,7 +91,7 @@ module.exports = {
       art.Abstract, art.Views, art.TimePublish, 
       art.IDSubCategory,sub.SubCategoryName
     FROM article art, users u, sub_categories sub
-    WHERE u.IDUser = art.Writter and art.Status = 3
+    WHERE u.IDUser = art.Writter and art.Status = 4
     and sub.IDSubCategory = art.IDSubCategory
     and art.IDCate = ${id}
     ORDER BY art.TimePublish`
@@ -104,7 +104,7 @@ module.exports = {
       art.Abstract, art.Views, art.TimePublish, 
       art.IDSubCategory,sub.SubCategoryName
     FROM article art, users u, sub_categories sub
-    WHERE u.IDUser = art.Writter and art.Status = 3
+    WHERE u.IDUser = art.Writter and art.Status = 4
     and sub.IDSubCategory = art.IDSubCategory
     and art.IDSubCategory = ${id}
     ORDER BY art.TimePublish
