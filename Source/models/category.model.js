@@ -78,7 +78,11 @@ module.exports = {
       `select IDCategory, CategoryName from ${TBL_category} where status = 1 and IDCategory=${id}`
     );
   },
-
+  SingleCateBySubCate: function (id) {
+    return db.load(
+      `select IDCategory, CategoryName from ${TBL_category} where status = 1 and IDCategory=${id}`
+    );
+  },
   GetNameByID:async function(id){  
       const result = await db.load(`SELECT CategoryName FROM ${TBL_category} WHERE IDCategory = ${id}`);
       return result[0].CategoryName;
@@ -87,9 +91,9 @@ module.exports = {
     const result = await db.load(`SELECT SubCategoryName FROM ${TBL_sub_category} WHERE IDSubCategory = ${id}`);
     return result[0].SubCategoryName;
   },
-
-  // loadSubCateByIDcate: function (idCate) {
-  //   return db.load(
-  //     `SELECT IDSubCategory, IDCategory, SubCategoryName FROM sub_categories WHERE status = 1 and IDCategory = ${idCate}`
-  //   );
+  GetIdCateBySubCate: function (idSubCate) {
+    return db.load(
+      `SELECT  IDCategory FROM sub_categories WHERE status = 1 and IDSubCategory = ${idSubCate}`
+    );
+}
 };

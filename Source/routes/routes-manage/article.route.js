@@ -215,8 +215,7 @@ router.post("/write", acl.middleware(3), upload.single("image"), async function 
   const fileUpload = new Resize(imagePath);
   const URLofIMG = await fileUpload.save(req.file.buffer);
     //filename is URL of IMG
-   const idCate = await ModelCategory.SingleSubCate(req.body.sub_category)
-    
+   const idCate = await ModelCategory.GetIdCateBySubCate(req.body.sub_category)
    const obj = {
     Title: req.body.title,
     Content: req.body.FullDes,
@@ -237,11 +236,6 @@ router.post("/write", acl.middleware(3), upload.single("image"), async function 
   const AllTag = await ModelTag.SelectAll()
   const id = await ModelArticle.IDSingleLast()
   let tags = req.body.tag
-  // if(typeof req.body.tag == 'string')
-  // {
-          
-  // }
-
   tags = tags.split(',');
   
   for (let index = 0; index < tags.length; index++) {
@@ -299,6 +293,7 @@ router.post("/publish", acl.middleware(3), async function (req, res) {
     Status: status,
     TimePublish: moment(req.body.Date + " "+ req.body.Time).format('YYYY-MM-DD HH-mm-ss')
   }
+  console.log(obj)
   await ModelArticle.updateArticle(obj,req.body.IDArticle)
   //insert censorship table 
   const obj2 = {

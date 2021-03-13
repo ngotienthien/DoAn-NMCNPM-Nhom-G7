@@ -113,6 +113,11 @@
                                 <li class="account-box__item">
                                     <a href="/updateProfile" for="account--checked">Thông tin cá nhân</a>
                                 </li>
+                                {{#if lcIsManager}}
+                                <li class="account-box__item">
+                                    <a class="dropdown-item" href="/manage"><i class="fa fa-cog" aria-hidden="true"></i> Manage</a>
+                                </li>
+                                {{/if}}
                                 <li class="account-box__item">
                                   <form action="/logout" method="POST">
                                     <button style="width: 100%; padding: 5px 0px 5px 0px;" type="submit" >Đăng xuất</button>
