@@ -114,213 +114,85 @@
             </div>
         </div>
         <!-- Begin Section Blog -->
-        <div class="content-title">
-            <h3 class="content-title__heading">Blog thành viên</h3>
+        <div class="title-sub">
+            <h3 class="title-sub__heading">Lượt xem cao nhất</h3>
         </div>
         <div class="post">
             <div class="row">
-                <!-- 2 Item Big -->
-                <div class="row post-item--big">
+                {{#if listTop3Views}}
+                <!-- 3 Item Big -->
+                <div class="post-item--big">
+                    {{#each listTop3Views}}
                     <div class="col l-4">
-                        <a href="#" class="post-item">
+                        <a href="/details?id={{IDArticle}}" class="post-item">
                             <div class="post-item__img">
-                                <img src="../../assets/resources/img/logoTourism.png" alt="First item">
+                                <img 
+                                src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" 
+                                alt="Background">
                             </div>  
                             <div class="post-info">
                                 <div class="">
-                                    <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
+                                    <h3 class="post-info__heading">{{Title}}</h3>
                                     <p class="post-info__paragraph">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
+                                        {{Abstract}}
                                     </p>
                                 </div>
                             </div>
                             <div class="post-info-avt">
-                                <img src="../../assets/resources/img/logoTourism.png" alt="Author">
+                                <img src="../../assets/resources/img/user/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                            </div>
+                            <div class="post-time">
+                                <span class="post-time-item">
+                                    <i class="fas fa-eye"></i> {{Views}}
+                                </span>
+                                <span class="post-time-item">
+                                    {{#format_date_time TimePublish}}{{/format_date_time}}
+                                </span>
+                                <span class="post-time-item">
+                                    {{SubCategoryName}}
+                                </span>
                             </div>
                         </a>
                     </div>
-                    <div class="col l-4">
-                        <a href="#" class="post-item">
-                            <div class="post-item__img">
-                                <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                            </div>  
-                            <div class="post-info">
-                                <div class="">
-                                    <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                    <p class="post-info__paragraph">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="post-info-avt">
-                                <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col l-4">
-                        <a href="#" class="post-item">
-                            <div class="post-item__img">
-                                <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                            </div>  
-                            <div class="post-info">
-                                <div class="">
-                                    <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                    <p class="post-info__paragraph">
-                                        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="post-info-avt">
-                                <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                            </div>
-                        </a>
-                    </div>
+                    {{/each}}
                 </div>
                 <!-- 8 Item Small -->
+                {{#each listTop8ViewsLast}}
                 <div class="col l-3">
-                    <a href="#" class="post-item">
+                    <a href="/details?id={{IDArticle}}" class="post-item post-item--small">
                         <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
+                            <img 
+                                src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" 
+                                alt="Background">
                         </div>  
                         <div class="post-info">
                             <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
+                                <h3 class="post-info__heading">{{Title}}</h3>
                                 <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
+                                {{Abstract}}   
                                 </p>
                             </div>
                         </div>
                         <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
+                            <img src="../../assets/resources/img/user/{{#if avtWriter}}{{avtWriter}}{{else}}user.png{{/if}}" alt="{{FullName}}">
+                        </div>
+                        <div class="post-time">
+                            <span class="post-time-item">
+                                <i class="fas fa-eye"></i> {{Views}}
+                            </span>
+                            <span class="post-time-item">
+                                {{#format_date_time TimePublish}}{{/format_date_time}}
+                            </span>
+                            <span class="post-time-item">
+                                {{SubCategoryName}}
+                            </span>
                         </div>
                     </a>
                 </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="post-info">
-                            <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="post-info">
-                            <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="post-info">
-                            <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="post-info">
-                            <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="post-info">
-                            <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="post-info">
-                            <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="post-info">
-                            <div class="">
-                                <h3 class="post-info__heading">5 Điểm Đến Hấp Dẫn Ở Miền Trung Dịp Tết Nguyên Đán</h3>
-                                <p class="post-info__paragraph">
-                                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Adipisci velit quis reiciendis, ducimus ea quos modi totam quibusdam veritatis fugiat!
-                                </p>
-                            </div>
-                        </div>
-                        <div class="post-info-avt">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="Author">
-                        </div>
-                    </a>
-                </div>
+                {{/each}}
+                {{else}}
+                Không có bài viết
+                {{/if}}
             </div>
         </div>
         <!-- End Section Blog -->
@@ -343,163 +215,25 @@
         <div class="post">
             <div class="row">
                 <!-- 12 Item Small -->
+                {{#if listTop12Place}}
+                {{#each listTop12Place}}
                 <div class="col l-3">
                     <a href="#" class="post-item place-item">
                         <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
+                            <img src="../../public/images/{{#if Avatar}}{{Avatar}}{{else}}default.png{{/if}}" alt="First item">
                         </div>  
                         <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
+                            <h3 class="place-info__heading">{{CategoryName}}</h3>
                             <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
+                                <span class="place--number">{{count}}</span> điểm tham quan
                             </p>
                         </div>
                     </a>
                 </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col l-3">
-                    <a href="#" class="post-item place-item">
-                        <div class="post-item__img">
-                            <img src="../../assets/resources/img/logoTourism.png" alt="First item">
-                        </div>  
-                        <div class="place-info">
-                            <h3 class="place-info__heading">Vịnh Hạ Long</h3>
-                            <p class="place-info__score">
-                                <span class="place--number">12</span> điểm tham quan
-                            </p>
-                        </div>
-                    </a>
-                </div>
-                
+                {{/each}}
+                {{else}}
+                Không có dữ liệu
+                {{/if}}
                 <!-- end 12 item -->
             </div>
         </div>

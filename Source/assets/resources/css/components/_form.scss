@@ -11,6 +11,10 @@
         }
     }
 
+    &__input--small{
+        height: 35px;
+    }
+
     &__check{
         margin: 8px 0;
     }
@@ -22,7 +26,7 @@
         .gender{
             width: 220px;
             input{
-                transform: scale(1.2);
+                transform: scale(1);
                 transition: all .2s;
                 &:focus{
                     outline: none;
