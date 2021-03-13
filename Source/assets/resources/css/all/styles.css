@@ -79,10 +79,6 @@ body {
   outline: none;
   width: 200px; }
 
-.login-input-with__google:active {
-  transform: rotate(10deg);
-  opacity: 0; }
-
 .login-input-btn input:hover, .login-input-btn input:focus,
 .login-input-btn a:hover,
 .login-input-btn a:focus {
@@ -844,6 +840,8 @@ body {
   box-shadow: 0 0 20px #ccc;
   border-radius: 20px;
   transition: all .3s ease;
+  width: 100%;
+  min-height: 350px;
   overflow: hidden; }
   .post-item__img {
     width: 100%;
@@ -851,7 +849,8 @@ body {
     overflow: hidden;
     border-radius: 20px 20px 0 0; }
     .post-item__img img {
-      width: 100%; }
+      width: 100%;
+      height: 100%; }
   .post-item--small .post-item__img {
     height: 200px; }
   .post-item--small .post-time {
@@ -868,13 +867,20 @@ body {
     font-size: 20px;
     font-weight: 500;
     margin-top: 4px;
-    margin-bottom: 4px; }
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: pre-wrap; }
   .post-info__paragraph {
     letter-spacing: 1px;
     line-height: 20px;
     height: 40px;
     overflow: hidden;
-    text-overflow: ellipsis; }
+    text-overflow: ellipsis;
+    white-space: pre-wrap; }
   .post-info-avt {
     position: absolute;
     top: 2%;
@@ -890,9 +896,13 @@ body {
 
 .post-item--big {
   position: relative;
-  overflow: hidden; }
+  overflow: hidden;
+  display: flex;
+  flex-direction: row; }
   .post-item--big .blog-item__img {
     height: 250px; }
+  .post-item--big .post-item {
+    min-height: 450px; }
   .post-item--big .blog-info {
     position: absolute;
     bottom: -100%;

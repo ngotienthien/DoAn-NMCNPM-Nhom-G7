@@ -4,7 +4,19 @@ const { text } = require("express");
 const TBL_article = "article";
 module.exports = {
   // Use Home Top views and Top place
-  Top11Views: function () {
+  Top4Rand: function () {
+    return db.load(`
+    SELECT art.IDArticle, art.Title, art.Avatar,
+      u.IDUser, u.FullName, u.Avatar avtWriter,
+      art.Abstract, art.Views, art.TimePublish, 
+      art.IDSubCategory,sub.SubCategoryName
+    FROM article art, users u, sub_categories sub
+    WHERE u.IDUser = art.Writter and art.Status = 3
+    and sub.IDSubCategory = art.IDSubCategory
+    ORDER BY RAND() LIMIT 4
+    `);
+  },
+  Top12Views: function () {
     return db.load(`
     SELECT art.IDArticle, art.Title, art.Avatar,
       u.IDUser, u.FullName, u.Avatar avtWriter,
@@ -16,10 +28,39 @@ module.exports = {
     ORDER BY art.Views DESC LIMIT 11
     `);
   },
+
+  Top12Time: function () {
+    return db.load(`
+    SELECT art.IDArticle, art.Title, art.Avatar,
+      u.IDUser, u.FullName, u.Avatar avtWriter,
+      art.Abstract, art.Views, art.TimePublish, 
+      art.IDSubCategory,sub.SubCategoryName
+    FROM article art, users u, sub_categories sub
+    WHERE u.IDUser = art.Writter and art.Status = 3
+    and sub.IDSubCategory = art.IDSubCategory
+    ORDER BY art.TimePublish DESC LIMIT 12
+    `);
+  },
+
+  Top6RelationshipRand: function (id) {
+    return db.load(`
+    SELECT art.IDArticle, art.Title, art.Avatar,
+      u.IDUser, u.FullName, u.Avatar avtWriter,
+      art.Abstract, art.Views, art.TimePublish, 
+      art.IDSubCategory,sub.SubCategoryName
+    FROM article art, users u, sub_categories sub
+    WHERE u.IDUser = art.Writter and art.Status = 3
+    and sub.IDSubCategory = art.IDSubCategory
+    and art.IDCate <> ${id}
+    
+    ORDER BY Rand() LIMIT 6
+    `);
+  },
+
   Top12Place: function(){
     return db.load(`
     select c.IDCategory, c.CategoryName,
-      COUNT(c.IDCategory) count
+      COUNT(c.IDCategory) count, c.avt as Avatar
     from cate c, sub_categories s
     where c.IDCategory = s.IDCategory
     and c.Status = 1
@@ -28,6 +69,7 @@ module.exports = {
     ORDER BY count DESC LIMIT 12
     `);
   },
+  
   singleArticle: function(id){
     return db.load(`
     Select art.IDArticle, art.Title, art.Content, art.Avatar,

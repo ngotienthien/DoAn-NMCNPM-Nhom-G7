@@ -3,6 +3,22 @@ const db = require("../utils/db");
 const TBL_comment = "comment";
 
 module.exports = {
+  addComment: function(entity)
+  {
+      return db.add(TBL_comment, entity);
+  },
+  allCommentIdArticle: function(id){
+    return db.load(`
+    SELECT c.Date, c.Comment, u.IDUser, u.FullName, u.Avatar, a.IDArticle
+    FROM Comment c, users u, article a
+    WHERE u.IDUser = c.IDUser
+    AND a.IDArticle = c.IDArticle
+    AND a.Status = ${id}
+      `
+    );
+  },
+
+  //////////////////////////////
   CommentWithIDpost: function(idPost){
       return db.load(`SELECT CM.Comment, CM.Date, US.FullName, US.UserName, US.avatar
       FROM ${TBL_comment} CM JOIN users US ON CM.IDUser = US.IDUser
@@ -14,10 +30,6 @@ module.exports = {
     FROM article art JOIN ${TBL_comment} CM ON art.IDArticle = CM.IDArticle JOIN users US ON US.IDUser = art.Writter
     WHERE US.IDUser = ${idAuthor}`);
     return result[0].numOfComment;
-  },
-  addComment: function(entity)
-  {
-      return db.add(TBL_comment, entity);
   },
   SingleCommentWithIdUserAndArticle: async function(idUser, idArticle){
       const result = await db.load(`SELECT US.FullName, US.UserName, US.Avatar, CM.Comment, DATE_FORMAT(CM.Date, "%M %d, %Y") as CmDate
